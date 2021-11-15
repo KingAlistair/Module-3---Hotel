@@ -1,5 +1,5 @@
 public class Guest {
-//delete me
+
     private String firstName;
     private String lastName;
     private String address;

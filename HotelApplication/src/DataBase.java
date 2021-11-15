@@ -1,7 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-//HELOWEOWJIDJWIOP shit
 public class DataBase implements Serializable {
     private ArrayList<Staff> staffList;
 
