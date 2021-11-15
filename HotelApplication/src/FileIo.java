@@ -1,7 +1,36 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class FileIo {
+    private static final String file = "database.ser";
+
+    public static void databaseSerialization(DataBase database) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(database);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        } catch (IOException e) {
+            System.out.println("ERROR IN SAVING DATABASE");
+        }
+    }
+
+
+    public static DataBase databaseDeserialization() {
+        DataBase database = new DataBase();
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            database = (DataBase) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("ERROR ");
+        }
+        return database;
+    }
+}
+
+/*
 
     public static void staffListSerialization(ArrayList<Staff> staffList) {
         try {
@@ -33,4 +62,5 @@ public class FileIo {
             }
             return staffList;
         }
-    }
+*/
+
