@@ -1,9 +1,15 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //HELOWEOWJIDJWIOP shit
-public class DataBase {
+public class DataBase implements Serializable {
+    private ArrayList<Staff> staffList;
 
-    public static ArrayList<Staff> getStaffList(){
+    public DataBase(){
+        this.staffList = defaultStaffList();
+    }
+
+    public static ArrayList<Staff> defaultStaffList(){
         ArrayList<Staff> staffList = new ArrayList<>();
         Staff staff1 = new Staff("Fé","Santa", "the cleaning lady", 19999, "+55123456789");
         Staff staff2 = new Staff("Mu","Bíbic", "the director", 199999, "+45123456789");
@@ -15,6 +21,14 @@ public class DataBase {
         staffList.add(staff3);
         staffList.add(staff4);
 
+        return staffList;
+    }
+
+    public void setStaffList(ArrayList<Staff> staffList) {
+        this.staffList = staffList;
+    }
+
+    public ArrayList<Staff> getStaffList() {
         return staffList;
     }
 }

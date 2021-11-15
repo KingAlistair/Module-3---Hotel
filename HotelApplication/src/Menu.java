@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Menu {
 
     public void mainMenu() {
-        ArrayList<Staff> staffList = FileIo.staffListDeserialization();
+      DataBase database = new DataBase();
 
         System.out.println("Press 1 to print out the list of staff: ");
         System.out.println("Press 3 to save staff list");
@@ -13,11 +13,13 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                Staff.printStaffList(staffList);
+                for (Staff staff: database.getStaffList()) {
+                    staff.printStaff();
+                }
                 break;
 
             case "3":
-                FileIo.staffListSerialization(DataBase.getStaffList());
+                FileIo.databaseSerialization(database);
                 mainMenu();
                 break;
 
