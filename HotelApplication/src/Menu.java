@@ -6,19 +6,22 @@ public class Menu {
     public void mainMenu() {
       DataBase database = new DataBase();
 
-        System.out.println("Press 1 to print out the list of staff: ");
-        System.out.println("Press 3 to save staff list");
-        System.out.println("Press 6 to quit");
+        System.out.println("1 Manage Booking");
+        System.out.println("2 Manage Staff ");
+        System.out.println("3 Manage Guests");
+        System.out.println("4 Manage Room");
+        System.out.println("Press \"r\" to reset Database");
+        System.out.println("Press 5 to quit");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         switch (input) {
-            case "1":
+            case "2":
                 for (Staff staff: database.getStaffList()) {
                     staff.printStaff();
                 }
                 break;
 
-            case "3":
+            case "r":
                 FileIo.databaseSerialization(database);
                 mainMenu();
                 break;
