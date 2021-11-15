@@ -70,6 +70,7 @@ public class Menu {
                 for (Staff staff : dataBase.getStaffList()) {
                     staff.printStaff();
                 }
+                break;
                 case "5":
                 System.exit(1);
                 break;
@@ -81,7 +82,8 @@ public class Menu {
 
 
         }
-
+        //y no return ma friend?!
+     return;
     }
 
     public void createStaff() {
