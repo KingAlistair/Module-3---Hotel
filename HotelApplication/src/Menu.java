@@ -3,8 +3,10 @@ import java.util.Scanner;
 
 public class Menu {
     private Staff staff;
+    //private DataBase dataBase;
+    private FileIo saveToDatabase;
 
-    public void mainMenu() {
+    public DataBase mainMenu() {
         DataBase database = new DataBase();
         System.out.println("*** HOTEL MÅSKEPARADISE ***");
         System.out.println("1 Administer Booking");
@@ -38,10 +40,10 @@ public class Menu {
                 break;
         }
 
-
+      return mainMenu();
     }
 
-    public void administerStaff() {
+    public DataBase administerStaff() {
         DataBase dataBase = new DataBase();
         System.out.println("S T A F F  M E N U ");
         System.out.println("1. Add new staff member");
@@ -57,7 +59,7 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                createStaff();
+                createStaff(dataBase, saveToDatabase);
                 break;
             case "2":
                 System.out.println("Manage staff");
@@ -83,10 +85,10 @@ public class Menu {
 
         }
         //y no return ma friend?!
-     return;
+     return mainMenu();
     }
 
-    public void createStaff() {
+    public DataBase createStaff(DataBase dataBase, FileIo saveToDatabase) {
         Scanner input = new Scanner(System.in);
         System.out.println("Please input title");
         //staff.setTitle(input.nextLine());
@@ -103,8 +105,14 @@ public class Menu {
         System.out.println("Please input salary");
         String salary = input.nextLine();
         //staff.setSalary(input.nextLine());
-        Staff staff = new Staff(title, firstName, lastName, salary, phoneNumber);
+        Staff staff = new Staff();
+        //why is it not adding?!? >:(
+        if (staff!= null){
+            dataBase.getStaffList().add(staff);
 
+
+        }
+         return administerStaff();
     }
 
 }
