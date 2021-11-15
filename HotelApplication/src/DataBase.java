@@ -2,6 +2,14 @@ import java.util.ArrayList;
 
 public class DataBase {
 
+    private ArrayList<Staff> staffList;
+   // private Arraylist <Guest> guestList;
+   // private Arraylist <Room> guestList;
+
+    public DataBase(){
+        this.staffList = getStaffList();
+    }
+
     public static ArrayList<Staff> getStaffList(){
         ArrayList<Staff> staffList = new ArrayList<>();
         Staff staff1 = new Staff("Fé","Santa", "the cleaning lady", 19999, "+55123456789");
