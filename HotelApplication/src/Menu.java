@@ -66,7 +66,7 @@ public class Menu {
                 System.out.println("Remove from staff");
                 break;
             case "4":
-
+               //we have a method for this in staff lolol how to put it here. hmmm
                 for (Staff staff : dataBase.getStaffList()) {
                     staff.printStaff();
                 }
