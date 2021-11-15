@@ -8,6 +8,8 @@ public class DataBase implements Serializable {
         this.staffList = defaultStaffList();
     }
 
+
+
     public static ArrayList<Staff> defaultStaffList(){
         ArrayList<Staff> staffList = new ArrayList<>();
         Staff staff1 = new Staff("Fé","Santa", "the cleaning lady", 19999, "+55123456789");
