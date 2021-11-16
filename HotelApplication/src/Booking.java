@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Booking {
+public class Booking implements java.io.Serializable{
     private int id;
     private ArrayList<Guest> guestList;
     private Room room;
