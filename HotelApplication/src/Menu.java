@@ -82,16 +82,13 @@ public class Menu {
                 System.out.println("Wrong input ");
                 mainMenu();
                 break;
-
-
         }
 
     }
 
-
-    //Return type staff to save
     //Creates staff, save it into file
     public void createStaff() {
+        //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
@@ -109,9 +106,13 @@ public class Menu {
         double salary = input.nextDouble();
         Staff staff = new Staff(firstName,lastName,title,salary,phoneNumber);
 
+        //Saving it into file
         staffList.add(staff);
         dataBase.setStaffList(staffList);
         FileIo.databaseSerialization(dataBase);
+
+        //Return main menu
+        mainMenu();
     }
 }
 

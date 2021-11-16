@@ -1,4 +1,4 @@
-public class Room {
+public class Room implements java.io.Serializable{
 
     private int roomNumber;
     private int floor;

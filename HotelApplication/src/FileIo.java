@@ -3,13 +3,14 @@ public class FileIo {
 
     public static void databaseSerialization(DataBase database) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("database.ser");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(database);
-            objectOutputStream.flush();
-            objectOutputStream.close();
-        } catch (IOException e) {
-            System.out.println("ERROR IN SAVING DATABASE");
+            FileOutputStream fileOut =
+                    new FileOutputStream("database.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(database);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
         }
     }
 
