@@ -16,6 +16,7 @@ public class Staff implements java.io.Serializable {
         this.salary = salary;
         this.phoneNumber = phoneNumber;
     }
+    public Staff(){}
 
     public void printStaff(){
         System.out.println("Name: " + firstName + " " + lastName + "\n"
