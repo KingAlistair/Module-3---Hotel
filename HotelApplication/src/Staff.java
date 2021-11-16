@@ -1,4 +1,3 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Staff implements java.io.Serializable {
@@ -6,21 +5,21 @@ public class Staff implements java.io.Serializable {
     private String firstName;
     private String lastName;
     private String title;
-    private String salary;
+    private double salary;
     private String phoneNumber;
 
-    public Staff(String firstName, String lastName, String title, String salary, String phoneNumber){
+    public Staff(String firstName, String lastName, String title, double salary, String phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
         this.salary = salary;
         this.phoneNumber = phoneNumber;
     }
-    public Staff(){}
 
     public void printStaff(){
-        System.out.println("Name: " + firstName + " " + lastName + "\n"
-        + title + " monthly salary DKK: " + salary + " DKK");
+        System.out.println("\nName: " + firstName + " " + lastName +
+         "\nTitle: " + title +
+                "\nSalary: " + salary + " DKK\n");
     }
 
     public static void printStaffList(ArrayList<Staff> staffList){
@@ -53,11 +52,11 @@ public class Staff implements java.io.Serializable {
         this.title = title;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

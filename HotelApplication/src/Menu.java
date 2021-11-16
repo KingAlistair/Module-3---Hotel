@@ -1,13 +1,11 @@
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    private Staff staff;
-    //private DataBase dataBase;
-    private FileIo saveToDatabase;
+    public void mainMenu() {
 
-    public DataBase mainMenu() {
-        DataBase database = new DataBase();
+
         System.out.println("*** HOTEL MÅSKEPARADISE ***");
         System.out.println("1 Administer Booking");
         System.out.println("2 Administer Staff ");
@@ -21,12 +19,16 @@ public class Menu {
         switch (input) {
             case "1":
                 break;
+
             case "2":
                 administerStaff();
                 break;
+
             case "3":
+
             case "r":
-                FileIo.databaseSerialization(database);
+                DataBase dataBase = new DataBase();
+                FileIo.databaseSerialization(dataBase);
                 mainMenu();
                 break;
 
@@ -39,12 +41,11 @@ public class Menu {
                 mainMenu();
                 break;
         }
-
-      return mainMenu();
     }
 
-    public DataBase administerStaff() {
-        DataBase dataBase = new DataBase();
+    public void administerStaff() {
+        DataBase dataBase = FileIo.databaseDeserialization();
+
         System.out.println("S T A F F  M E N U ");
         System.out.println("1. Add new staff member");
         System.out.println("2. Manage staff Member");
@@ -59,20 +60,20 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                createStaff(dataBase, saveToDatabase);
+                createStaff();
                 break;
+
             case "2":
                 System.out.println("Manage staff");
                 break;
             case "3":
                 System.out.println("Remove from staff");
                 break;
+
             case "4":
-               //we have a method for this in staff lolol how to put it here. hmmm
-                for (Staff staff : dataBase.getStaffList()) {
-                    staff.printStaff();
-                }
+                Staff.printStaffList(dataBase.getStaffList());
                 break;
+
                 case "5":
                 System.exit(1);
                 break;
@@ -84,37 +85,34 @@ public class Menu {
 
 
         }
-        //y no return ma friend?!
-     return mainMenu();
+
     }
 
-    public DataBase createStaff(DataBase dataBase, FileIo saveToDatabase) {
+
+    //Return type staff to save
+    //Creates staff, save it into file
+    public void createStaff() {
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
         Scanner input = new Scanner(System.in);
-        System.out.println("Please input title");
-        //staff.setTitle(input.nextLine());
-        String title = input.nextLine();
+
         System.out.println("Please input first name");
         String firstName = input.nextLine();
-        //staff.setFirstName(input.nextLine());
         System.out.println("Please input last name");
         String lastName = input.nextLine();
-        //staff.setLastName(input.nextLine());
+        System.out.println("Please input title");
+        String title = input.nextLine();
         System.out.println("Please input phone number");
         String phoneNumber = input.nextLine();
-        //staff.setPhoneNumber(input.nextLine());
         System.out.println("Please input salary");
-        String salary = input.nextLine();
-        //staff.setSalary(input.nextLine());
-        Staff staff = new Staff();
-        //why is it not adding?!? >:(
-        if (staff!= null){
-            dataBase.getStaffList().add(staff);
+        double salary = input.nextDouble();
+        Staff staff = new Staff(firstName,lastName,title,salary,phoneNumber);
 
-
-        }
-         return administerStaff();
+        staffList.add(staff);
+        dataBase.setStaffList(staffList);
+        FileIo.databaseSerialization(dataBase);
     }
-
 }
 
 

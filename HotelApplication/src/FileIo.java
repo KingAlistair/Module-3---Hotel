@@ -1,11 +1,9 @@
 import java.io.*;
-//hellow
 public class FileIo {
-    private static final String file = "database.ser";
 
     public static void databaseSerialization(DataBase database) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FileOutputStream fileOutputStream = new FileOutputStream("database.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(database);
             objectOutputStream.flush();
@@ -19,7 +17,7 @@ public class FileIo {
     public static DataBase databaseDeserialization() {
         DataBase database = new DataBase();
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
+            FileInputStream fileInputStream = new FileInputStream("database.ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             database = (DataBase) objectInputStream.readObject();
             objectInputStream.close();
