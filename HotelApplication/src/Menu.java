@@ -5,15 +5,18 @@ import java.util.Scanner;
 
 public class Menu {
     public void mainMenu() {
-
-        System.out.println("*** HOTEL MÅSKEPARADISE ***");
+        System.out.println();
+        System.out.println();
+        System.out.println("=== HOTEL MÅSKEPARADISE ===");
         System.out.println("1 Administer Booking");
         System.out.println("2 Administer Staff ");
         System.out.println("3 Administer Guests");
         System.out.println("4 Administer Room");
         System.out.println("Press \"r\" to reset Database");
         System.out.println("Press 5 to quit");
-        System.out.println("***************************");
+        System.out.println("===========================");
+        System.out.println();
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         switch (input) {
@@ -25,6 +28,7 @@ public class Menu {
                 break;
 
             case "3":
+                manageStaff();
 
             case "r":
                 DataBase dataBase = new DataBase();
@@ -64,11 +68,10 @@ public class Menu {
                 break;
 
             case "2":
-                System.out.println("Manage staff");
+                manageStaff();
                 break;
             case "3":
                 removeStaff();
-                administerStaff();
                 break;
 
             case "4":
@@ -121,27 +124,41 @@ public class Menu {
         administerStaff();
     }
 
-    public Staff manageStaff(){
-        //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Staff> staffList = dataBase.getStaffList();
+    public void manageStaff() {
+        System.out.println("1. Change first name of staff member");
+        System.out.println("2. Change last name of staff member");
+        System.out.println("3. Change title of staff member");
+        System.out.println("4. Change phone number of staff member");
+        System.out.println("5. Change salary of staff member");
+        System.out.println("Press enter to exit to administer staff");
 
-        System.out.println("Staff list: ");
-        Staff.printStaffList(staffList);
+        switch (stringInput()) {
+            case "1":
+                System.out.println("Changing first name of staff"+ "\n");
+                break;
+            case "2":
+                System.out.println("changing last name of staff"+ "\n");
+                break;
+            case "3":
+                System.out.println("changing title of staff"+ "\n");
+                break;
+            case "4":
+                System.out.println("Changing phone number of staff" + "\n");
+                break;
+            case "5":
+                System.out.println("changing salary of staff" + "\n");
 
+            case "":
+                administerStaff();
+                break;
 
-        System.out.println("Chose the ID of the staff member would you like to edit");
-        String ID = stringInput();
-        //find staff member by ID, then give options to change
-        //first name, last name, title, phone number, salary.
-
-        for (Staff staff : staffList){
-            if (staff.getId().equals(ID)){
-                return staff;
-            }
+            default:
+                System.out.println("Wrong input ");
+                administerStaff();
+                break;
         }
-
-
+        //returns to administer staff menu
+        administerStaff();
 
     }
 
@@ -166,7 +183,9 @@ public class Menu {
         FileIo.databaseSerialization(dataBase);
 
         System.out.println("Staff member has now been removed");
-        return;
+
+        //returns to administer staff menu
+        administerStaff();
     }
 
 
