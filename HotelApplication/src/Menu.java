@@ -6,15 +6,16 @@ import java.util.Scanner;
 public class Menu {
     public void mainMenu() {
         System.out.println();
-        System.out.println();
-        System.out.println("=== HOTEL MÅSKEPARADISE ===");
-        System.out.println("1 Administer Booking");
-        System.out.println("2 Administer Staff ");
-        System.out.println("3 Administer Guests");
-        System.out.println("4 Administer Room");
-        System.out.println("Press \"r\" to reset Database");
-        System.out.println("Press 5 to quit");
-        System.out.println("===========================");
+        System.out.println("======================================================");
+        System.out.println("     H O T E L   M Å S K E P A R A D I S E  " );
+        System.out.println("======================================================");
+        System.out.println("             1 Administer Booking");
+        System.out.println("             2 Administer Staff ");
+        System.out.println("             3 Administer Guests");
+        System.out.println("             4 Administer Room");
+        System.out.println("             Press \"r\" to reset Database");
+        System.out.println("             5 to quit");
+        System.out.println("======================================================");
         System.out.println();
         System.out.println();
         Scanner scanner = new Scanner(System.in);
