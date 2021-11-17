@@ -2,9 +2,9 @@ import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Menu {
     public void mainMenu() {
-
 
         System.out.println("*** HOTEL MÅSKEPARADISE ***");
         System.out.println("1 Administer Booking");
@@ -51,7 +51,7 @@ public class Menu {
         System.out.println("2. Manage staff Member");
         System.out.println("3. Remove Staff member");
         System.out.println("4. Show all staff");
-        System.out.println("5. Exit to main menu ");
+        System.out.println("Press \"enter\" main menu ");
         System.out.println();
         System.out.println();
         System.out.println("Please input choice");
@@ -72,10 +72,11 @@ public class Menu {
 
             case "4":
                 Staff.printStaffList(dataBase.getStaffList());
+                administerStaff();
                 break;
 
-                case "5":
-                System.exit(1);
+            case "":
+                mainMenu();
                 break;
 
             default:
@@ -92,19 +93,23 @@ public class Menu {
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
-        Scanner input = new Scanner(System.in);
-
+        //Create Staff
         System.out.println("Please input first name");
-        String firstName = input.nextLine();
+        String firstName = stringInput();
         System.out.println("Please input last name");
-        String lastName = input.nextLine();
+        String lastName = stringInput();
         System.out.println("Please input title");
-        String title = input.nextLine();
+        String title = stringInput();
         System.out.println("Please input phone number");
-        String phoneNumber = input.nextLine();
+        String phoneNumber = stringInput();
         System.out.println("Please input salary");
-        double salary = input.nextDouble();
-        Staff staff = new Staff(firstName,lastName,title,salary,phoneNumber);
+        double salary = doubleInput();
+
+        //Create Id
+        int id = staffList.size()+1;
+        String stringId = Integer.toString(id);
+
+        Staff staff = new Staff(stringId ,firstName, lastName, title, salary, phoneNumber);
 
         //Saving it into file
         staffList.add(staff);
@@ -112,7 +117,29 @@ public class Menu {
         FileIo.databaseSerialization(dataBase);
 
         //Return main menu
-        mainMenu();
+        administerStaff();
+    }
+
+    public void removeStaff() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
+        System.out.println("Staff list: ");
+        Staff.printStaffList(staffList);
+
+    }
+
+    public String stringInput() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        return input;
+    }
+
+    public Double doubleInput() {
+        Scanner scanner = new Scanner(System.in);
+        Double input = scanner.nextDouble();
+        return input;
     }
 }
 

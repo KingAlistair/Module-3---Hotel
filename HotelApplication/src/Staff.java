@@ -2,13 +2,15 @@ import java.util.ArrayList;
 
 public class Staff implements java.io.Serializable {
 
+    private String id;
     private String firstName;
     private String lastName;
     private String title;
     private double salary;
     private String phoneNumber;
 
-    public Staff(String firstName, String lastName, String title, double salary, String phoneNumber){
+    public Staff(String id, String firstName, String lastName, String title, double salary, String phoneNumber){
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -17,7 +19,7 @@ public class Staff implements java.io.Serializable {
     }
 
     public void printStaff(){
-        System.out.println("\nName: " + firstName + " " + lastName +
+        System.out.println("\nID: " + id +" Name: " + firstName + " " + lastName +
          "\nTitle: " + title +
                 "\nSalary: " + salary + " DKK\n");
     }
@@ -26,6 +28,14 @@ public class Staff implements java.io.Serializable {
         for (Staff staff : staffList) {
             staff.printStaff();
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName(){
