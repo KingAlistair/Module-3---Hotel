@@ -37,7 +37,7 @@ public class Menu {
                 mainMenu();
                 break;
 
-            case "6":
+            case "5":
                 System.exit(1);
                 break;
 
