@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DataBase implements Serializable {
+public class DataBase implements java.io.Serializable {
     private ArrayList<Staff> staffList;
     private ArrayList<Guest> guestList;
     private ArrayList<Room> roomList;
@@ -16,10 +16,10 @@ public class DataBase implements Serializable {
 
     public static ArrayList<Staff> defaultStaffList(){
         ArrayList<Staff> staffList = new ArrayList<>();
-        Staff staff1 = new Staff("Fé","Santa", "the cleaning lady", "19999", "+55123456789");
-        Staff staff2 = new Staff("Mu","Bíbic", "the director", "199999", "+45123456789");
-        Staff staff3 = new Staff("Danielle","DelSartó", "the accountant", "199999.9", "+36123456789");
-        Staff staff4 = new Staff("Bogi","Wogi", "the receptionist", "1999.9", "+36123456788");
+        Staff staff1 = new Staff("1","Fé","Santa", "the cleaning lady", 19999, "+55123456789");
+        Staff staff2 = new Staff("2","Mu","Bíbic", "the director", 199999, "+45123456789");
+        Staff staff3 = new Staff("3","Danielle","DelSartó", "the accountant", 199999.9, "+36123456789");
+        Staff staff4 = new Staff("4","Bogi","Wogi", "the receptionist", 1999.9, "+36123456788");
 
         staffList.add(staff1);
         staffList.add(staff2);

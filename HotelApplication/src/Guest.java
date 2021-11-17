@@ -1,4 +1,4 @@
-public class Guest {
+public class Guest implements java.io.Serializable {
 
     private String firstName;
     private String lastName;
