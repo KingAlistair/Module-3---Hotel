@@ -50,14 +50,15 @@ public class Menu {
 
     public void administerStaff() {
         DataBase dataBase = FileIo.databaseDeserialization();
-
-        System.out.println("S T A F F  M E N U ");
-        System.out.println("1. Add new staff member");
-        System.out.println("2. Manage staff Member");
-        System.out.println("3. Remove Staff member");
-        System.out.println("4. Show all staff");
-        System.out.println("Press \"enter\" to exit to main menu ");
-        System.out.println();
+        System.out.println("======================================================");
+        System.out.println("               S T A F F  M E N U ");
+        System.out.println("======================================================");
+        System.out.println("              1. Add new staff member");
+        System.out.println("              2. Manage staff Member");
+        System.out.println("              3. Remove Staff member");
+        System.out.println("              4. Show all staff" + "\n");
+        System.out.println("         Press \"enter\" to exit to main menu ");
+        System.out.println("======================================================");
         System.out.println();
         System.out.println("Please input choice");
 
