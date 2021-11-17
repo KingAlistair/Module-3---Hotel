@@ -19,9 +19,12 @@ public class Staff implements java.io.Serializable {
     }
 
     public void printStaff(){
-        System.out.println("\nID: " + id + "\n" +" Name: " + firstName + " " + lastName +
-         "\nTitle: " + title +
-                "\nSalary: " + salary + " DKK\n");
+        System.out.println( "====================" +
+                            "\nID: " + id +
+                            "\n" +"Name: " + firstName + " " + lastName +
+                            "\nTitle: " + title +
+                            "\nSalary: " + salary + " DKK\n"
+                            );
     }
 
     public static void printStaffList(ArrayList<Staff> staffList){
