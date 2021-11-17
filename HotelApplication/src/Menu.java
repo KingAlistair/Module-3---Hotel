@@ -127,13 +127,14 @@ public class Menu {
     }
 
     public void manageStaff() {
-        System.out.println("1. Change first name of staff member");
-        System.out.println("2. Change last name of staff member");
-        System.out.println("3. Change title of staff member");
-        System.out.println("4. Change phone number of staff member");
-        System.out.println("5. Change salary of staff member");
-        System.out.println("Press enter to exit to administer staff");
-
+        System.out.println("======================================================");
+        System.out.println("       1. Change first name of staff member");
+        System.out.println("       2. Change last name of staff member");
+        System.out.println("       3. Change title of staff member");
+        System.out.println("       4. Change phone number of staff member");
+        System.out.println("       5. Change salary of staff member" + "\n");
+        System.out.println("      Press enter to exit to administer staff");
+        System.out.println("======================================================");
         switch (stringInput()) {
             case "1":
                 System.out.println("Changing first name of staff"+ "\n");
