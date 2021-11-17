@@ -51,7 +51,7 @@ public class Menu {
         System.out.println("2. Manage staff Member");
         System.out.println("3. Remove Staff member");
         System.out.println("4. Show all staff");
-        System.out.println("Press \"enter\" main menu ");
+        System.out.println("Press \"enter\" to exit to main menu ");
         System.out.println();
         System.out.println();
         System.out.println("Please input choice");
@@ -67,7 +67,7 @@ public class Menu {
                 System.out.println("Manage staff");
                 break;
             case "3":
-                System.out.println("Remove from staff");
+                removeStaff();
                 break;
 
             case "4":
@@ -128,7 +128,22 @@ public class Menu {
         System.out.println("Staff list: ");
         Staff.printStaffList(staffList);
 
-    }
+        System.out.println("Chose the staff member you wish to remove");
+        //trying to search for staff in the arraylist
+        stringInput();
+        for (Staff staff : staffList){
+            if (staff.getId().equals(stringInput())){
+                staffList.remove(staff);
+            }
+        }
+        System.out.println("Staff member has now been removed");
+        return;
+       }
+
+
+
+
+
 
     public String stringInput() {
         Scanner scanner = new Scanner(System.in);
