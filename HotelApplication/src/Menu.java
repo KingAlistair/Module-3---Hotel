@@ -128,16 +128,17 @@ public class Menu {
         System.out.println("Staff list: ");
         Staff.printStaffList(staffList);
 
-        System.out.println("Chose the staff member you wish to remove");
+        System.out.println("Chose the ID of the staff member you wish to remove");
         //trying to search for staff in the arraylist
-        stringInput();
-        for (Staff staff : staffList){
-            if (staff.getId().equals(stringInput())){
-                staffList.remove(staff);
+        for (Staff staff : dataBase.getStaffList()){
+            if (stringInput().equals(staff.getId())) {
+                dataBase.getStaffList().remove(staff);
+                System.out.println("Staff member has now been removed");
+                return;
             }
         }
-        System.out.println("Staff member has now been removed");
-        return;
+
+
        }
 
 
