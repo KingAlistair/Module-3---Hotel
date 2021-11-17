@@ -132,7 +132,7 @@ public class Menu {
         System.out.println("Chose the ID of the staff member you wish to remove");
         String ID = stringInput();
 
-        //if stringInput is equal to ID the staff member will be removed
+        //remove if: for each staff, remove staff which equals the ID input by user
         staffList.removeIf(staff -> staff.getId().equals(ID));
         //we then set the staffList
         dataBase.setStaffList(staffList);
@@ -142,14 +142,6 @@ public class Menu {
         System.out.println("Staff member has now been removed");
         return;
     }
-
-
-
-
-
-
-
-
 
 
     public String stringInput() {
