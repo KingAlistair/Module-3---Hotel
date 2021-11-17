@@ -100,16 +100,18 @@ public class Menu {
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //Create Staff
-        System.out.println("Please input first name");
+        System.out.println("======================================================");
+        System.out.println("            Please input first name");
         String firstName = stringInput();
-        System.out.println("Please input last name");
+        System.out.println("            Please input last name");
         String lastName = stringInput();
-        System.out.println("Please input title");
+        System.out.println("            Please input title");
         String title = stringInput();
-        System.out.println("Please input phone number");
+        System.out.println("            Please input phone number");
         String phoneNumber = stringInput();
-        System.out.println("Please input salary");
+        System.out.println("            Please input salary");
         double salary = doubleInput();
+        System.out.println("======================================================");
 
         //Create Id
         int id = staffList.size()+1;
@@ -127,6 +129,7 @@ public class Menu {
     }
 
     public void manageStaff() {
+        System.out.println();
         System.out.println("======================================================");
         System.out.println("       1. Change first name of staff member");
         System.out.println("       2. Change last name of staff member");
@@ -135,6 +138,9 @@ public class Menu {
         System.out.println("       5. Change salary of staff member" + "\n");
         System.out.println("      Press enter to exit to administer staff");
         System.out.println("======================================================");
+        System.out.println(
+
+        );
         switch (stringInput()) {
             case "1":
                 System.out.println("Changing first name of staff"+ "\n");
