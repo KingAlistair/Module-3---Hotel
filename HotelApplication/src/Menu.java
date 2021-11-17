@@ -121,6 +121,30 @@ public class Menu {
         administerStaff();
     }
 
+    public Staff manageStaff(){
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
+        System.out.println("Staff list: ");
+        Staff.printStaffList(staffList);
+
+
+        System.out.println("Chose the ID of the staff member would you like to edit");
+        String ID = stringInput();
+        //find staff member by ID, then give options to change
+        //first name, last name, title, phone number, salary.
+
+        for (Staff staff : staffList){
+            if (staff.getId().equals(ID)){
+                return staff;
+            }
+        }
+
+
+
+    }
+
     public void removeStaff() {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
@@ -131,6 +155,8 @@ public class Menu {
 
         System.out.println("Chose the ID of the staff member you wish to remove");
         String ID = stringInput();
+
+
 
         //remove if: for each staff, remove staff which equals the ID input by user
         staffList.removeIf(staff -> staff.getId().equals(ID));
