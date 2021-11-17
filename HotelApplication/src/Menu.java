@@ -130,11 +130,13 @@ public class Menu {
 
         System.out.println("Chose the ID of the staff member you wish to remove");
         //trying to search for staff in the arraylist
-        for (Staff staff : dataBase.getStaffList()){
-            if (stringInput().equals(staff.getId())) {
-                dataBase.getStaffList().remove(staff);
+        //why is it not working >:'(((
+        for (Staff staff : staffList){
+            if (staff.getId().equals(stringInput())) {
+                staffList.remove(staff);
+
                 System.out.println("Staff member has now been removed");
-                return;
+
             }
         }
 
