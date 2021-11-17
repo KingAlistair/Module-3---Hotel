@@ -132,10 +132,11 @@ public class Menu {
         System.out.println("Chose the ID of the staff member you wish to remove");
         String ID = stringInput();
 
-        //trying to search for staff in the arraylist
-        //why is it not working >:'(((
+        //if stringInput is equal to ID the staff member will be removed
         staffList.removeIf(staff -> staff.getId().equals(ID));
+        //we then set the staffList
         dataBase.setStaffList(staffList);
+        //and serialise it
         FileIo.databaseSerialization(dataBase);
 
         System.out.println("Staff member has now been removed");
