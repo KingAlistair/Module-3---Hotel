@@ -68,6 +68,7 @@ public class Menu {
                 break;
             case "3":
                 removeStaff();
+                administerStaff();
                 break;
 
             case "4":
@@ -129,19 +130,21 @@ public class Menu {
         Staff.printStaffList(staffList);
 
         System.out.println("Chose the ID of the staff member you wish to remove");
+        String ID = stringInput();
+
         //trying to search for staff in the arraylist
         //why is it not working >:'(((
-        for (Staff staff : staffList){
-            if (staff.getId().equals(stringInput())) {
-                staffList.remove(staff);
+        staffList.removeIf(staff -> staff.getId().equals(ID));
+        dataBase.setStaffList(staffList);
+        FileIo.databaseSerialization(dataBase);
 
-                System.out.println("Staff member has now been removed");
+        System.out.println("Staff member has now been removed");
+        return;
+    }
 
-            }
-        }
 
 
-       }
+
 
 
 
