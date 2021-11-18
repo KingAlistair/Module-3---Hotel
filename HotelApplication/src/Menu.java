@@ -56,9 +56,9 @@ public class Menu {
         System.out.println("======================================================");
         System.out.println("              B O O K I N G  M E N U ");
         System.out.println("======================================================");
-        System.out.println("              1. Add new booking");
+        System.out.println("              1. Create booking");
         System.out.println("              2. Manage booking");
-        System.out.println("              3. Remove booking");
+        System.out.println("              3. Delete booking");
         System.out.println("              4. Show all bookings" + "\n");
         System.out.println("         Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
