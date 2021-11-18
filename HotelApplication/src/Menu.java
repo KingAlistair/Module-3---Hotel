@@ -223,6 +223,15 @@ public class Menu {
     }
 
     public void manageStaff() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
+        Staff.printStaffList(staffList);
+
+        //chose ID of staff we want to change
+        Staff staff = dataBase.getStaffList().get(0);
+
         System.out.println();
         System.out.println("======================================================");
         System.out.println("       1. Change first name of staff member");
@@ -237,19 +246,27 @@ public class Menu {
         );
         switch (stringInput()) {
             case "1":
-                System.out.println("Changing first name of staff" + "\n");
+                System.out.println("Input new first name");
+                staff.setFirstName(stringInput());
+                manageStaff();
                 break;
             case "2":
-                System.out.println("changing last name of staff" + "\n");
+                System.out.println("Input new last name");
+                staff.setLastName(stringInput());
+                manageStaff();
                 break;
             case "3":
-                System.out.println("changing title of staff" + "\n");
+                System.out.println("Input new title");
+                staff.setTitle(stringInput());
+                manageStaff();
                 break;
             case "4":
-                System.out.println("Changing phone number of staff" + "\n");
+                System.out.println("Input new phone number");
+                staff.setPhoneNumber(stringInput());
                 break;
             case "5":
-                System.out.println("changing salary of staff" + "\n");
+                System.out.println("Input new salary");
+                staff.setSalary(doubleInput());
 
             case "":
                 administerStaff();
