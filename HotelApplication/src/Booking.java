@@ -9,14 +9,14 @@ public class Booking implements java.io.Serializable {
     private double endPrice;
     private int numberOfNights;
 
-    public Booking(int id, ArrayList<Guest> guestList, Room room, String startDate, String endDate, double endPrice, int numberOfNights) {
+    public Booking(int id, ArrayList<Guest> guestList, Room room, String startDate, String endDate) {
         this.id = id;
         this.guestList = guestList;
         this.room = room;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.endPrice = endPrice;
-        this.numberOfNights = numberOfNights;
+        this.endPrice = 0;
+        this.numberOfNights = 0;
     }
 
     public int getId() {
