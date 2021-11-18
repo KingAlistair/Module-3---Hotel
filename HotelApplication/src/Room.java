@@ -1,4 +1,4 @@
-public class Room implements java.io.Serializable{
+public class Room implements java.io.Serializable {
 
     private int roomNumber;
     private int floor;
@@ -56,10 +56,13 @@ public class Room implements java.io.Serializable{
         this.price = price;
     }
 
-    public boolean isSuite(){return suite;}
+    public boolean isSuite() {
+        return suite;
+    }
 
-    public void setSuite(boolean suite){this.suite = suite;}
-
+    public void setSuite(boolean suite) {
+        this.suite = suite;
+    }
 
 
 }

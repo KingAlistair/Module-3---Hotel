@@ -1,10 +1,10 @@
 import java.io.*;
+
 public class FileIo {
 
     public static void databaseSerialization(DataBase database) {
         try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("database.ser");
+            FileOutputStream fileOut = new FileOutputStream("database.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(database);
             out.close();
