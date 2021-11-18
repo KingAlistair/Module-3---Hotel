@@ -10,5 +10,5 @@ public class Main {
 }
 
 //To do list:
-
+//Do methods for manageGuest and manageStaff: to be able to change details of Guest and staff
 //Singleton pattern

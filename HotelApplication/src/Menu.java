@@ -23,6 +23,7 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
+                //administerBooking();
                 break;
 
             case "2":
@@ -30,7 +31,7 @@ public class Menu {
                 break;
 
             case "3":
-                manageStaff();
+                administerGuest();
 
             case "r":
                 DataBase dataBase = new DataBase();
@@ -43,7 +44,7 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input ");
+                System.out.println("Wrong input, returning to <Main Menu> ");
                 mainMenu();
                 break;
         }
@@ -62,7 +63,7 @@ public class Menu {
         System.out.println("         Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
         System.out.println();
-        System.out.println("Please input choice");
+        System.out.println("Please input choice: ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -88,8 +89,8 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input ");
-                mainMenu();
+                System.out.println("Wrong input, please try again! ");
+                administerStaff();
                 break;
         }
 
@@ -103,15 +104,15 @@ public class Menu {
 
         //Create Staff
         System.out.println("======================================================");
-        System.out.println("            Please input first name");
+        System.out.println("            Please input first name: ");
         String firstName = stringInput();
-        System.out.println("            Please input last name");
+        System.out.println("            Please input last name: ");
         String lastName = stringInput();
-        System.out.println("            Please input title");
+        System.out.println("            Please input title: ");
         String title = stringInput();
-        System.out.println("            Please input phone number");
+        System.out.println("            Please input phone number: ");
         String phoneNumber = stringInput();
-        System.out.println("            Please input salary");
+        System.out.println("            Please input salary: ");
         double salary = doubleInput();
         System.out.println("======================================================");
 
@@ -164,7 +165,7 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input ");
+                System.out.println("Wrong input, please try again! ");
                 administerStaff();
                 break;
         }
@@ -181,7 +182,7 @@ public class Menu {
         System.out.println("Staff list: ");
         Staff.printStaffList(staffList);
 
-        System.out.println("Chose the ID of the staff member you wish to remove");
+        System.out.println("Chose the ID of the staff member you wish to remove: ");
         String ID = stringInput();
 
 
@@ -192,7 +193,7 @@ public class Menu {
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
-        System.out.println("Staff member has now been removed");
+        System.out.println("Staff member has now been removed!");
 
         //returns to administer staff menu
         administerStaff();
@@ -236,8 +237,8 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input, returning to Main Menu! ");
-                mainMenu();
+                System.out.println("Wrong input, please try again! ");
+                administerGuest();
                 break;
         }
 
@@ -251,13 +252,13 @@ public class Menu {
 
         //Create Guest
         System.out.println("======================================================");
-        System.out.println("            Please input first name");
+        System.out.println("            Please input first name: ");
         String firstName = stringInput();
-        System.out.println("            Please input last name");
+        System.out.println("            Please input last name: ");
         String lastName = stringInput();
-        System.out.println("            Please input address");
+        System.out.println("            Please input address: ");
         String address = stringInput();
-        System.out.println("            Please input phone number");
+        System.out.println("            Please input phone number: ");
         String phoneNumber = stringInput();
         System.out.println("======================================================");
 
@@ -305,8 +306,8 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input returning to Manage Guests ");
-                administerGuest();
+                System.out.println("Wrong input, please try again! ");
+                manageGuest();
                 break;
         }
         //returns to administer guest menu
@@ -322,7 +323,7 @@ public class Menu {
         System.out.println("Guest list: ");
         Guest.printGuestList(guestList);
 
-        System.out.println("Chose the ID of the guest you wish to remove");
+        System.out.println("Chose the ID of the guest you wish to remove: ");
         String ID = stringInput();
 
 
@@ -333,7 +334,7 @@ public class Menu {
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
-        System.out.println("Guest member has now been removed");
+        System.out.println("Guest member has now been removed!");
 
         //returns to administer guest menu
         administerGuest();
