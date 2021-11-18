@@ -50,6 +50,9 @@ public class Menu {
         }
     }
 
+    //------------------------------BOOKING MENU PART--------------------------------------
+
+
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
         DataBase dataBase = FileIo.databaseDeserialization();
