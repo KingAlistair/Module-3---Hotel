@@ -5,11 +5,13 @@ public class DataBase implements java.io.Serializable {
     private ArrayList<Staff> staffList;
     private ArrayList<Guest> guestList;
     private ArrayList<Room> roomList;
+    private ArrayList<Booking> bookingList;
 
     public DataBase() {
         this.staffList = defaultStaffList();
         this.guestList = defaultGuestList();
         this.roomList = defaultRoomList();
+        this.bookingList = defaultBookingList();
     }
 
 
@@ -75,6 +77,12 @@ public class DataBase implements java.io.Serializable {
 
     }
 
+    private static ArrayList<Booking> defaultBookingList(){
+        ArrayList bookingList = new ArrayList();
+
+        return bookingList;
+    }
+
     public void setStaffList(ArrayList<Staff> staffList) {
         this.staffList = staffList;
     }
@@ -97,5 +105,13 @@ public class DataBase implements java.io.Serializable {
 
     public ArrayList<Room> getRoomList() {
         return roomList;
+    }
+
+    public void setBookingList(ArrayList<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public ArrayList<Booking> getBookingList() {
+        return bookingList;
     }
 }

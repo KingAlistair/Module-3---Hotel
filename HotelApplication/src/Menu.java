@@ -23,7 +23,7 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                //administerBooking();
+                administerBooking();
                 break;
 
             case "2":
@@ -52,7 +52,9 @@ public class Menu {
 
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
-        DataBase dataBase = FileIo.databaseDeserialization();
+
+        //DataBase dataBase = FileIo.databaseDeserialization();
+
         System.out.println("======================================================");
         System.out.println("              B O O K I N G  M E N U ");
         System.out.println("======================================================");
@@ -99,6 +101,7 @@ public class Menu {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = new ArrayList<>();
+        ArrayList<Booking> bookingList = new ArrayList<>();
 
         //maybe we print out available rooms before input?
         Room.printRoomList(roomList);
@@ -118,6 +121,16 @@ public class Menu {
         double endPrice = doubleInput();
         System.out.println("======================================================");
 
+        //Create Id
+        int id = bookingList.size() + 1;
+        String stringId = Integer.toString(id);
+
+        Booking booking = new Booking();
+
+        //Saving it into file
+        bookingList.add(booking);
+        dataBase.setBookingList(bookingList);
+        FileIo.databaseSerialization(dataBase);
     }
 
 
