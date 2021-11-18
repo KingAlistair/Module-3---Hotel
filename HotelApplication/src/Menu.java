@@ -111,6 +111,8 @@ public class Menu {
         //should we just get the room by the ID?
         System.out.println("            Please choose room number: ");
         String room = stringInput();
+        System.out.println("            Please input name of Guest");
+        String guestList = stringInput();
         System.out.println("            Please input check in date: ");
         String startDate = stringInput();
         System.out.println("            Please input check out date: ");
@@ -119,13 +121,15 @@ public class Menu {
         //the same could go for the number of nights?
         System.out.println("            Please input price : ");
         double endPrice = doubleInput();
+        System.out.println("            Please input numberOfNights");
+        int numberOfnights = intInput();
         System.out.println("======================================================");
 
         //Create Id
         int id = bookingList.size() + 1;
         String stringId = Integer.toString(id);
 
-        Booking booking = new Booking();
+        Booking booking = new Booking(id, guestList, startDate, endDate, endPrice, numberOfnights);
 
         //Saving it into file
         bookingList.add(booking);
@@ -438,6 +442,12 @@ public class Menu {
     public Double doubleInput() {
         Scanner scanner = new Scanner(System.in);
         Double input = scanner.nextDouble();
+        return input;
+    }
+
+    public int intInput(){
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
         return input;
     }
 
