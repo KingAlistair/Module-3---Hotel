@@ -69,18 +69,18 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                ;
+                createBooking();
                 break;
 
             case "2":
-
+                System.out.println("Manage booking");
                 break;
             case "3":
-
+                System.out.println("Delete booking");
                 break;
 
             case "4":
-
+                System.out.println("Show all current bookings");
                 break;
 
             case "":
