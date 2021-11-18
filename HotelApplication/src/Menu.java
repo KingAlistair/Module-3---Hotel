@@ -51,7 +51,49 @@ public class Menu {
     }
 
     //------------------------------BOOKING MENU PART--------------------------------------
+    public void administerBooking() {
+        DataBase dataBase = FileIo.databaseDeserialization();
+        System.out.println("======================================================");
+        System.out.println("              B O O K I N G  M E N U ");
+        System.out.println("======================================================");
+        System.out.println("              1. Add new booking");
+        System.out.println("              2. Manage booking");
+        System.out.println("              3. Remove booking");
+        System.out.println("              4. Show all bookings" + "\n");
+        System.out.println("         Press \"enter\" to exit to main menu ");
+        System.out.println("======================================================");
+        System.out.println();
+        System.out.println("Please input choice: ");
 
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                ;
+                break;
+
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+
+            case "4":
+
+                break;
+
+            case "":
+                mainMenu();
+                break;
+
+            default:
+                System.out.println("Wrong input, please try again! ");
+                administerStaff();
+                break;
+        }
+
+    }
 
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
