@@ -101,6 +101,7 @@ public class Menu {
         ArrayList<Room> roomList = new ArrayList<>();
 
         //maybe we print out available rooms before input?
+        Room.printRoomList(roomList);
 
         //Create room
         System.out.println("======================================================");
@@ -173,6 +174,7 @@ public class Menu {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
+
 
         //Create Staff
         System.out.println("======================================================");
