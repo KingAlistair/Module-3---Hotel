@@ -17,10 +17,10 @@ public class DataBase implements java.io.Serializable {
 
     public static ArrayList<Staff> defaultStaffList() {
         ArrayList<Staff> staffList = new ArrayList<>();
-        Staff staff1 = new Staff("1", "Fé", "Santa", "the cleaning lady", 19999, "+55123456789");
-        Staff staff2 = new Staff("2", "Mu", "Bíbic", "the director", 199999, "+45123456789");
-        Staff staff3 = new Staff("3", "Danielle", "DelSartó", "the accountant", 199999.9, "+36123456789");
-        Staff staff4 = new Staff("4", "Bogi", "Wogi", "the receptionist", 1999.9, "+36123456788");
+        Staff staff1 = new Staff(1, "Fé", "Santa", "the cleaning lady", 19999, "+55123456789");
+        Staff staff2 = new Staff(2, "Mu", "Bíbic", "the director", 199999, "+45123456789");
+        Staff staff3 = new Staff(3, "Danielle", "DelSartó", "the accountant", 199999.9, "+36123456789");
+        Staff staff4 = new Staff(4, "Bogi", "Wogi", "the receptionist", 1999.9, "+36123456788");
 
         staffList.add(staff1);
         staffList.add(staff2);
@@ -33,14 +33,14 @@ public class DataBase implements java.io.Serializable {
     public static ArrayList<Guest> defaultGuestList() {
         ArrayList<Guest> guestList = new ArrayList<>();
 
-        Guest guest1 = new Guest("1", "BarbaPappa", "Pape-Poulsen", "Pappagade 12", "+45 76525434");
-        Guest guest2 = new Guest("2", "Moomin", "Troll", "Moomin valley 1", "+358 145677431");
-        Guest guest3 = new Guest("3", "Bobobo-bo", "Bo-Bobo", "Goldennoselane 27", "+81 23391263");
-        Guest guest4 = new Guest("4", "Mekk", "Elek", "ház", "+36 23532768");
-        Guest guest5 = new Guest("5", "Bob", "Fenékpuszta", "Visznek 32", "+36 5626244764");
-        Guest guest6 = new Guest("6", "Fofão", "Ay", "R. Do Sol 64", "+55 23678321");
-        Guest guest7 = new Guest("7", "Eva", "Johanson", "Vestvej 5", "+45 29314562");
-        Guest guest8 = new Guest("8", "Saga", "Lorein", "Knuttsgata 15 ", "+46 35562465");
+        Guest guest1 = new Guest(1, "BarbaPappa", "Pape-Poulsen", "Pappagade 12", "+45 76525434");
+        Guest guest2 = new Guest(2, "Moomin", "Troll", "Moomin valley 1", "+358 145677431");
+        Guest guest3 = new Guest(3, "Bobobo-bo", "Bo-Bobo", "Goldennoselane 27", "+81 23391263");
+        Guest guest4 = new Guest(4, "Mekk", "Elek", "ház", "+36 23532768");
+        Guest guest5 = new Guest(5, "Bob", "Fenékpuszta", "Visznek 32", "+36 5626244764");
+        Guest guest6 = new Guest(6, "Fofão", "Ay", "R. Do Sol 64", "+55 23678321");
+        Guest guest7 = new Guest(7, "Eva", "Johanson", "Vestvej 5", "+45 29314562");
+        Guest guest8 = new Guest(8, "Saga", "Lorein", "Knuttsgata 15 ", "+46 35562465");
 
         guestList.add(guest1);
         guestList.add(guest2);

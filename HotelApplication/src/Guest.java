@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Guest implements java.io.Serializable {
 
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
 
-    public Guest(String id, String firstName, String lastName, String address, String phoneNumber) {
+    public Guest(int id, String firstName, String lastName, String address, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,11 +31,11 @@ public class Guest implements java.io.Serializable {
         }
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

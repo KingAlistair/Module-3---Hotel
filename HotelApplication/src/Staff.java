@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class Staff implements java.io.Serializable {
 
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String title;
     private double salary;
     private String phoneNumber;
 
-    public Staff(String id, String firstName, String lastName, String title, double salary, String phoneNumber) {
+    public Staff(int id, String firstName, String lastName, String title, double salary, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,11 +33,11 @@ public class Staff implements java.io.Serializable {
         }
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
