@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 
 public class Menu {
+    //--------------------------------MAIN MENU------------------------------------------
     public void mainMenu() {
         System.out.println();
         System.out.println("======================================================");
-        System.out.println("        H O T E L   M Å S K E P A R A D I S E  "          );
+        System.out.println("        H O T E L   M Å S K E P A R A D I S E  ");
         System.out.println("======================================================");
         System.out.println("                1 Administer Booking");
         System.out.println("                2 Administer Staff ");
@@ -22,6 +23,7 @@ public class Menu {
         String input = scanner.nextLine();
         switch (input) {
             case "1":
+                administerBooking();
                 break;
 
             case "2":
@@ -29,7 +31,7 @@ public class Menu {
                 break;
 
             case "3":
-                manageStaff();
+                administerGuest();
 
             case "r":
                 DataBase dataBase = new DataBase();
@@ -37,30 +39,124 @@ public class Menu {
                 mainMenu();
                 break;
 
-            case "6":
+            case "5":
                 System.exit(1);
                 break;
 
             default:
-                System.out.println("Wrong input ");
+                System.out.println("Wrong input, returning to <Main Menu> ");
                 mainMenu();
                 break;
         }
     }
 
+    //------------------------------BOOKING MENU PART--------------------------------------
+    public void administerBooking() {
+
+        //DataBase dataBase = FileIo.databaseDeserialization();
+
+        System.out.println("======================================================");
+        System.out.println("              B O O K I N G  M E N U ");
+        System.out.println("======================================================");
+        System.out.println("              1. Create booking");
+        System.out.println("              2. Manage booking");
+        System.out.println("              3. Delete booking");
+        System.out.println("              4. Show all bookings" + "\n");
+        System.out.println("         Press \"enter\" to exit to main menu ");
+        System.out.println("======================================================");
+        System.out.println();
+        System.out.println("Please input choice: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                createBooking();
+                break;
+
+            case "2":
+                System.out.println("Manage booking");
+                break;
+            case "3":
+                System.out.println("Delete booking");
+                break;
+
+            case "4":
+                System.out.println("Show all current bookings");
+                break;
+
+            case "":
+                mainMenu();
+                break;
+
+            default:
+                System.out.println("Wrong input, please try again! ");
+                administerStaff();
+                break;
+        }
+
+    }
+
+    public void createBooking(){
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Room> roomList = new ArrayList<>();
+        ArrayList<Booking> bookingList = new ArrayList<>();
+
+        //maybe we print out available rooms before input?
+        Room.printRoomList(roomList);
+
+        //Create room
+        System.out.println("======================================================");
+        //should we just get the room by the ID?
+        System.out.println("            Please choose room number: ");
+        String room = stringInput();
+        System.out.println("            Please input name of Guest");
+        String guestList = stringInput();
+        System.out.println("            Please input check in date: ");
+        String startDate = stringInput();
+        System.out.println("            Please input check out date: ");
+        String endDate = stringInput();
+        //should we perhaps calculate this and just give the info?
+        //the same could go for the number of nights?
+        System.out.println("            Please input price : ");
+        double endPrice = doubleInput();
+        System.out.println("            Please input numberOfNights");
+        int numberOfNights = intInput();
+        System.out.println("======================================================");
+
+        //Create Id
+        int id = bookingList.size() + 1;
+        String stringId = Integer.toString(id);
+
+        Booking booking = new Booking(id, guestList, startDate, endDate, endPrice, numberOfNights);
+
+        //Saving it into file
+        bookingList.add(booking);
+        dataBase.setBookingList(bookingList);
+        FileIo.databaseSerialization(dataBase);
+
+        //returns to administer booking
+        administerBooking();
+    }
+
+
+
+
+    //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
         DataBase dataBase = FileIo.databaseDeserialization();
         System.out.println("======================================================");
         System.out.println("               S T A F F  M E N U ");
         System.out.println("======================================================");
         System.out.println("              1. Add new staff member");
-        System.out.println("              2. Manage staff Member");
-        System.out.println("              3. Remove Staff member");
+        System.out.println("              2. Manage staff member");
+        System.out.println("              3. Remove staff member");
         System.out.println("              4. Show all staff" + "\n");
         System.out.println("         Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
         System.out.println();
-        System.out.println("Please input choice");
+        System.out.println("Please input choice: ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -86,8 +182,8 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input ");
-                mainMenu();
+                System.out.println("Wrong input, please try again! ");
+                administerStaff();
                 break;
         }
 
@@ -99,25 +195,26 @@ public class Menu {
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
+
         //Create Staff
         System.out.println("======================================================");
-        System.out.println("            Please input first name");
+        System.out.println("            Please input first name: ");
         String firstName = stringInput();
-        System.out.println("            Please input last name");
+        System.out.println("            Please input last name: ");
         String lastName = stringInput();
-        System.out.println("            Please input title");
+        System.out.println("            Please input title: ");
         String title = stringInput();
-        System.out.println("            Please input phone number");
+        System.out.println("            Please input phone number: ");
         String phoneNumber = stringInput();
-        System.out.println("            Please input salary");
+        System.out.println("            Please input salary: ");
         double salary = doubleInput();
         System.out.println("======================================================");
 
         //Create Id
-        int id = staffList.size()+1;
+        int id = staffList.size() + 1;
         String stringId = Integer.toString(id);
 
-        Staff staff = new Staff(stringId ,firstName, lastName, title, salary, phoneNumber);
+        Staff staff = new Staff(stringId, firstName, lastName, title, salary, phoneNumber);
 
         //Saving it into file
         staffList.add(staff);
@@ -143,13 +240,13 @@ public class Menu {
         );
         switch (stringInput()) {
             case "1":
-                System.out.println("Changing first name of staff"+ "\n");
+                System.out.println("Changing first name of staff" + "\n");
                 break;
             case "2":
-                System.out.println("changing last name of staff"+ "\n");
+                System.out.println("changing last name of staff" + "\n");
                 break;
             case "3":
-                System.out.println("changing title of staff"+ "\n");
+                System.out.println("changing title of staff" + "\n");
                 break;
             case "4":
                 System.out.println("Changing phone number of staff" + "\n");
@@ -162,7 +259,7 @@ public class Menu {
                 break;
 
             default:
-                System.out.println("Wrong input ");
+                System.out.println("Wrong input, please try again! ");
                 administerStaff();
                 break;
         }
@@ -179,9 +276,8 @@ public class Menu {
         System.out.println("Staff list: ");
         Staff.printStaffList(staffList);
 
-        System.out.println("Chose the ID of the staff member you wish to remove");
+        System.out.println("Chose the ID of the staff member you wish to remove: ");
         String ID = stringInput();
-
 
 
         //remove if: for each staff, remove staff which equals the ID input by user
@@ -191,24 +287,173 @@ public class Menu {
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
-        System.out.println("Staff member has now been removed");
+        System.out.println("Staff member has now been removed!");
 
         //returns to administer staff menu
         administerStaff();
     }
 
+    //-------------------------GUEST MENU PART----------------------------------------
+    public void administerGuest() {
+        DataBase dataBase = FileIo.databaseDeserialization();
+        System.out.println("======================================================");
+        System.out.println("               G U E S T   M E N U ");
+        System.out.println("======================================================");
+        System.out.println("              1. Add new guest");
+        System.out.println("              2. Manage guests");
+        System.out.println("              3. Remove guest");
+        System.out.println("              4. Show all guests" + "\n");
+        System.out.println("         Press \"enter\" to exit to main menu ");
+        System.out.println("======================================================");
+        System.out.println();
+        System.out.println("Please input choice");
 
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                createGuest();
+                break;
+            case "2":
+                manageGuest();
+                break;
+
+            case "3":
+                removeGuest();
+                break;
+
+            case "4":
+                Guest.printGuestList(dataBase.getGuestList());
+                break;
+
+            case "":
+                mainMenu();
+                break;
+
+            default:
+                System.out.println("Wrong input, please try again! ");
+                administerGuest();
+                break;
+        }
+
+    }
+
+    //Creates guest, save it into file
+    public void createGuest() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+
+        //Create Guest
+        System.out.println("======================================================");
+        System.out.println("            Please input first name: ");
+        String firstName = stringInput();
+        System.out.println("            Please input last name: ");
+        String lastName = stringInput();
+        System.out.println("            Please input address: ");
+        String address = stringInput();
+        System.out.println("            Please input phone number: ");
+        String phoneNumber = stringInput();
+        System.out.println("======================================================");
+
+        //Create Id
+        int id = guestList.size() + 1;
+        String stringID = Integer.toString(id);
+
+        Guest guest = new Guest(stringID, firstName, lastName, address, phoneNumber);
+
+        //Saving it into file
+        guestList.add(guest);
+        dataBase.setGuestList(guestList);
+        FileIo.databaseSerialization(dataBase);
+
+        //Return to main menu
+        administerGuest();
+    }
+
+    public void manageGuest() {
+        System.out.println();
+        System.out.println("======================================================");
+        System.out.println("       1. Change first name of guest");
+        System.out.println("       2. Change last name of guest");
+        System.out.println("       3. Change phone number of guest");
+        System.out.println("       4. Change address of guest" + "\n");
+        System.out.println("      Press enter to exit to administer guest");
+        System.out.println("======================================================");
+        System.out.println();
+
+        switch (stringInput()) {
+            case "1":
+                System.out.println("Changing first name of guest" + "\n");
+                break;
+            case "2":
+                System.out.println("changing last name of guest" + "\n");
+                break;
+            case "3":
+                System.out.println("changing phone number of guest" + "\n");
+                break;
+            case "4":
+                System.out.println("Changing address of guest" + "\n");
+                break;
+            case "":
+                administerGuest();
+                break;
+
+            default:
+                System.out.println("Wrong input, please try again! ");
+                manageGuest();
+                break;
+        }
+        //returns to administer guest menu
+        administerGuest();
+
+    }
+
+    public void removeGuest() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+
+        System.out.println("Guest list: ");
+        Guest.printGuestList(guestList);
+
+        System.out.println("Chose the ID of the guest you wish to remove: ");
+        String ID = stringInput();
+
+
+        //remove if: for each guest, remove guest which equals the ID input by user
+        guestList.removeIf(guest -> guest.getId().equals(ID));
+        //we then set the guestList
+        dataBase.setGuestList(guestList);
+        //and serialise it
+        FileIo.databaseSerialization(dataBase);
+
+        System.out.println("Guest member has now been removed!");
+
+        //returns to administer guest menu
+        administerGuest();
+    }
+
+    //Method for user string input
     public String stringInput() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return input;
     }
 
+    //Method for user double input
     public Double doubleInput() {
         Scanner scanner = new Scanner(System.in);
         Double input = scanner.nextDouble();
         return input;
     }
+
+    public int intInput(){
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
+        return input;
+    }
+
 }
 
 

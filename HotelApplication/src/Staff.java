@@ -9,7 +9,7 @@ public class Staff implements java.io.Serializable {
     private double salary;
     private String phoneNumber;
 
-    public Staff(String id, String firstName, String lastName, String title, double salary, String phoneNumber){
+    public Staff(String id, String firstName, String lastName, String title, double salary, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,16 +18,16 @@ public class Staff implements java.io.Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public void printStaff(){
-        System.out.println( "====================" +
-                            "\nID: " + id +
-                            "\n" +"Name: " + firstName + " " + lastName +
-                            "\nTitle: " + title +
-                            "\nSalary: " + salary + " DKK\n"
-                            );
+    public void printStaff() {
+        System.out.println("====================" +
+                "\nID: " + id +
+                "\n" + "Name: " + firstName + " " + lastName +
+                "\nTitle: " + title +
+                "\nSalary: " + salary + " DKK\n"
+        );
     }
 
-    public static void printStaffList(ArrayList<Staff> staffList){
+    public static void printStaffList(ArrayList<Staff> staffList) {
         for (Staff staff : staffList) {
             staff.printStaff();
         }
@@ -41,7 +41,7 @@ public class Staff implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
