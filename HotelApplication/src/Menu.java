@@ -95,6 +95,33 @@ public class Menu {
 
     }
 
+    public void createBooking(){
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = new ArrayList<>();
+
+        //maybe we print out available rooms before input?
+
+        //Create room
+        System.out.println("======================================================");
+        //should we just get the room by the ID?
+        System.out.println("            Please choose room number: ");
+        String room = stringInput();
+        System.out.println("            Please input check in date: ");
+        String startDate = stringInput();
+        System.out.println("            Please input check out date: ");
+        String endDate = stringInput();
+        //should we perhaps calculate this and just give the info?
+        //the same could go for the number of nights?
+        System.out.println("            Please input price : ");
+        double endPrice = doubleInput();
+        System.out.println("======================================================");
+
+    }
+
+
+
+
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
         DataBase dataBase = FileIo.databaseDeserialization();
