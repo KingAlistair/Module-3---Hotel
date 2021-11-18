@@ -100,8 +100,9 @@ public class Menu {
     public void createBooking(){
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Room> roomList = new ArrayList<>();
-        ArrayList<Booking> bookingList = new ArrayList<>();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+        ArrayList<Room> roomList = dataBase.getRoomList();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         //maybe we print out available rooms before input?
         Room.printRoomList(roomList);
@@ -110,26 +111,22 @@ public class Menu {
         System.out.println("======================================================");
         //should we just get the room by the ID?
         System.out.println("            Please choose room number: ");
-        String room = stringInput();
+        Room room = roomList.get(1);
         System.out.println("            Please input name of Guest");
-        String guestList = stringInput();
+        guestList.add(guestList.get(1));
         System.out.println("            Please input check in date: ");
         String startDate = stringInput();
         System.out.println("            Please input check out date: ");
         String endDate = stringInput();
-        //should we perhaps calculate this and just give the info?
-        //the same could go for the number of nights?
-        System.out.println("            Please input price : ");
-        double endPrice = doubleInput();
-        System.out.println("            Please input numberOfNights");
-        int numberOfNights = intInput();
+
+        //should we perhaps calculate price and number of nights and just give the info?
         System.out.println("======================================================");
 
         //Create Id
         int id = bookingList.size() + 1;
         String stringId = Integer.toString(id);
 
-        Booking booking = new Booking(id, guestList, startDate, endDate, endPrice, numberOfNights);
+        Booking booking = new Booking(id, guestList, room, startDate, endDate);
 
         //Saving it into file
         bookingList.add(booking);
@@ -226,6 +223,15 @@ public class Menu {
     }
 
     public void manageStaff() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
+        Staff.printStaffList(staffList);
+
+        //chose ID of staff we want to change
+        Staff staff = dataBase.getStaffList().get(0);
+
         System.out.println();
         System.out.println("======================================================");
         System.out.println("       1. Change first name of staff member");
@@ -240,19 +246,27 @@ public class Menu {
         );
         switch (stringInput()) {
             case "1":
-                System.out.println("Changing first name of staff" + "\n");
+                System.out.println("Input new first name");
+                staff.setFirstName(stringInput());
+                manageStaff();
                 break;
             case "2":
-                System.out.println("changing last name of staff" + "\n");
+                System.out.println("Input new last name");
+                staff.setLastName(stringInput());
+                manageStaff();
                 break;
             case "3":
-                System.out.println("changing title of staff" + "\n");
+                System.out.println("Input new title");
+                staff.setTitle(stringInput());
+                manageStaff();
                 break;
             case "4":
-                System.out.println("Changing phone number of staff" + "\n");
+                System.out.println("Input new phone number");
+                staff.setPhoneNumber(stringInput());
                 break;
             case "5":
-                System.out.println("changing salary of staff" + "\n");
+                System.out.println("Input new salary");
+                staff.setSalary(doubleInput());
 
             case "":
                 administerStaff();
