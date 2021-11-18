@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Room implements java.io.Serializable {
 
     private int roomNumber;
@@ -14,6 +16,22 @@ public class Room implements java.io.Serializable {
         this.wifi = wifi;
         this.price = price;
         this.suite = suite;
+    }
+
+    public void printRoom() {
+        System.out.println("====================" +
+                "\nRoom: " + roomNumber + "\n" +
+                  "Amount of beds: " + amountOfBeds + "\n " +
+                  "Wifi" + wifi + "\n" +
+                  "Price: " + price + "DKK\n" +
+                  "Suite " + suite
+        );
+    }
+
+    public static void printRoomList(ArrayList<Room> roomList) {
+        for (Room room : roomList) {
+            room.printRoom();
+        }
     }
 
     public int getRoomNumber() {

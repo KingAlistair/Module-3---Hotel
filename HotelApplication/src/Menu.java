@@ -98,7 +98,7 @@ public class Menu {
     public void createBooking(){
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Guest> guestList = new ArrayList<>();
+        ArrayList<Room> roomList = new ArrayList<>();
 
         //maybe we print out available rooms before input?
 
