@@ -186,42 +186,6 @@ public class Menu {
 
     }
 
-    //Creates staff, save it into file
-    public void createStaff() {
-        //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Staff> staffList = dataBase.getStaffList();
-
-
-        //Create Staff
-        System.out.println("======================================================");
-        System.out.println("            Please input first name: ");
-        String firstName = stringInput();
-        System.out.println("            Please input last name: ");
-        String lastName = stringInput();
-        System.out.println("            Please input title: ");
-        String title = stringInput();
-        System.out.println("            Please input phone number: ");
-        String phoneNumber = stringInput();
-        System.out.println("            Please input salary: ");
-        double salary = doubleInput();
-        System.out.println("======================================================");
-
-        //Create Id
-        int id = staffList.size() + 1;
-        String stringId = Integer.toString(id);
-
-        Staff staff = new Staff(stringId, firstName, lastName, title, salary, phoneNumber);
-
-        //Saving it into file
-        staffList.add(staff);
-        dataBase.setStaffList(staffList);
-        FileIo.databaseSerialization(dataBase);
-
-        //Return main menu
-        administerStaff();
-    }
-
     public void manageStaff() {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
@@ -279,7 +243,54 @@ public class Menu {
         }
         //returns to administer staff menu
         administerStaff();
+    }
 
+    //Creates staff, save it into file
+    public void createStaff() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
+        //Create Staff
+        System.out.println("======================================================");
+        System.out.println("            Please input first name: ");
+        String firstName = stringInput();
+        System.out.println("            Please input last name: ");
+        String lastName = stringInput();
+        System.out.println("            Please input title: ");
+        String title = stringInput();
+        System.out.println("            Please input phone number: ");
+        String phoneNumber = stringInput();
+        System.out.println("            Please input salary: ");
+        double salary = doubleInput();
+        System.out.println("======================================================");
+
+        //Create Id
+        int id = -1;
+        int checkId = 1;
+
+        for (Staff staff : staffList
+        ) {
+            if (checkId == staff.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = staffList.size()+1;
+        }
+
+        Staff staff = new Staff(id, firstName, lastName, title, salary, phoneNumber);
+
+        //Saving it into file
+        staffList.add(staff);
+        dataBase.setStaffList(staffList);
+        FileIo.databaseSerialization(dataBase);
+        System.out.println("-Database is saved-");
+
+        //Return main menu
+        administerStaff();
     }
 
     public void removeStaff() {
@@ -291,11 +302,11 @@ public class Menu {
         Staff.printStaffList(staffList);
 
         System.out.println("Chose the ID of the staff member you wish to remove: ");
-        String ID = stringInput();
+        int ID = intInput();
 
 
         //remove if: for each staff, remove staff which equals the ID input by user
-        staffList.removeIf(staff -> staff.getId().equals(ID));
+        staffList.removeIf(staff -> staff.getId() == (ID));
         //we then set the staffList
         dataBase.setStaffList(staffList);
         //and serialise it
@@ -371,10 +382,21 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = guestList.size() + 1;
-        String stringID = Integer.toString(id);
+        int id = -1;
+        int checkId = 1;
 
-        Guest guest = new Guest(stringID, firstName, lastName, address, phoneNumber);
+        for (Guest guest : guestList
+        ) {
+            if (checkId == guest.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = guestList.size()+1;
+        }
+        Guest guest = new Guest(id, firstName, lastName, address, phoneNumber);
 
         //Saving it into file
         guestList.add(guest);
@@ -432,11 +454,11 @@ public class Menu {
         Guest.printGuestList(guestList);
 
         System.out.println("Chose the ID of the guest you wish to remove: ");
-        String ID = stringInput();
+        int ID = intInput();
 
 
         //remove if: for each guest, remove guest which equals the ID input by user
-        guestList.removeIf(guest -> guest.getId().equals(ID));
+        guestList.removeIf(guest -> guest.getId() == (ID));
         //we then set the guestList
         dataBase.setGuestList(guestList);
         //and serialise it
