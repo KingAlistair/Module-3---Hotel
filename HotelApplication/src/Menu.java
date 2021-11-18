@@ -122,19 +122,22 @@ public class Menu {
         System.out.println("            Please input price : ");
         double endPrice = doubleInput();
         System.out.println("            Please input numberOfNights");
-        int numberOfnights = intInput();
+        int numberOfNights = intInput();
         System.out.println("======================================================");
 
         //Create Id
         int id = bookingList.size() + 1;
         String stringId = Integer.toString(id);
 
-        Booking booking = new Booking(id, guestList, startDate, endDate, endPrice, numberOfnights);
+        Booking booking = new Booking(id, guestList, startDate, endDate, endPrice, numberOfNights);
 
         //Saving it into file
         bookingList.add(booking);
         dataBase.setBookingList(bookingList);
         FileIo.databaseSerialization(dataBase);
+
+        //returns to administer booking
+        administerBooking();
     }
 
 
