@@ -32,6 +32,7 @@ public class Menu {
 
             case "3":
                 administerGuest();
+                break;
 
             case "r":
                 DataBase dataBase = new DataBase();
