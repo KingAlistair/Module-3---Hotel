@@ -7,6 +7,5 @@ public class Main {
 }
 
 //To do list:
-//Organising lists according to ID
-//Do methods for manageGuest and manageStaff: to be able to change details of Guest and staff
+//Discuss booking and room structure and date;)
 //Singleton pattern

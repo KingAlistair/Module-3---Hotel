@@ -1,5 +1,5 @@
-import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Menu {
@@ -98,7 +98,7 @@ public class Menu {
 
     }
 
-    public void createBooking(){
+    public void createBooking() {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
@@ -124,20 +124,46 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = createBookingID(bookingList);
+        int id = -1;
+        int checkId = 1;
+
+        //Going through booking list to findID
+        for (Booking booking : bookingList) {
+            if (checkId == booking.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = bookingList.size() + 1;
+        }
 
         Booking booking = new Booking(id, guestList, room, startDate, endDate);
+        bookingList.add(booking);
+
+        //Organize bookingList
+        ArrayList<Integer> idList = new ArrayList<>();
+        for (Booking b : bookingList) {
+            idList.add(b.getId());
+        }
+        Collections.sort(idList);
+        ArrayList<Booking> organisedBookingList = new ArrayList<>();
+        for (int i : idList) {
+            for (Booking b : bookingList) {
+                if (i == b.getId()) {
+                    organisedBookingList.add(b);
+                }
+            }
+        }
 
         //Saving it into file
-        bookingList.add(booking);
-        dataBase.setBookingList(bookingList);
+        dataBase.setBookingList(organisedBookingList);
         FileIo.databaseSerialization(dataBase);
 
         //returns to administer booking
         administerBooking();
     }
-
-
 
 
     //-------------------------------STAFF MENU PART----------------------------------------
@@ -195,7 +221,7 @@ public class Menu {
 
         //chose ID of staff we want to change
         System.out.println("Chose the ID of the Staff you want to administer: ");
-        int inputID = intInput()-1;
+        int inputID = intInput() - 1;
         Staff staff = dataBase.getStaffList().get(inputID);
 
         System.out.println();
@@ -244,6 +270,9 @@ public class Menu {
                 administerStaff();
                 break;
         }
+
+        FileIo.databaseSerialization(dataBase);
+
         //returns to administer staff menu
         administerStaff();
     }
@@ -269,13 +298,40 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = createStaffID(staffList);
+        int id = -1;
+        int checkId = 1;
 
+        //Traversing through staffList to find ID
+        for (Staff staff : staffList) {
+            if (checkId == staff.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = staffList.size() + 1;
+        }
+        //Create new Staff object
         Staff staff = new Staff(id, firstName, lastName, title, salary, phoneNumber);
-
-        //Saving it into file
         staffList.add(staff);
-        dataBase.setStaffList(staffList);
+
+        //Organize staffList
+        ArrayList<Integer> idList = new ArrayList<>();
+        for (Staff s : staffList) {
+            idList.add(s.getId());
+        }
+        Collections.sort(idList);
+        ArrayList<Staff> organisedStaffList = new ArrayList<>();
+        for (int i : idList) {
+            for (Staff s : staffList) {
+                if (i == s.getId()) {
+                    organisedStaffList.add(s);
+                }
+            }
+        }
+        //Save database into file
+        dataBase.setStaffList(organisedStaffList);
         FileIo.databaseSerialization(dataBase);
         System.out.println("-Database is saved-");
 
@@ -339,6 +395,7 @@ public class Menu {
 
             case "4":
                 Guest.printGuestList(dataBase.getGuestList());
+                administerGuest();
                 break;
 
             case "":
@@ -372,13 +429,41 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = createGuestID(guestList);
+        int id = -1;
+        int checkId = 1;
+
+        //Going through guestList to find ID
+        for (Guest guest : guestList) {
+            if (checkId == guest.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = guestList.size() + 1;
+        }
 
         Guest guest = new Guest(id, firstName, lastName, address, phoneNumber);
+        guestList.add(guest);
+
+        //Organize staffList
+        ArrayList<Integer> idList = new ArrayList<>();
+        for (Guest g : guestList) {
+            idList.add(g.getId());
+        }
+        Collections.sort(idList);
+        ArrayList<Guest> organisedGuestList = new ArrayList<>();
+        for (int i : idList) {
+            for (Guest g : guestList) {
+                if (i == g.getId()) {
+                    organisedGuestList.add(g);
+                }
+            }
+        }
 
         //Saving it into file
-        guestList.add(guest);
-        dataBase.setGuestList(guestList);
+        dataBase.setGuestList(organisedGuestList);
         FileIo.databaseSerialization(dataBase);
 
         //Return to main menu
@@ -386,6 +471,15 @@ public class Menu {
     }
 
     public void manageGuest() {
+
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+
+        //chose ID of staff we want to change
+        System.out.println("Chose the ID of the Guest you want to administer: ");
+        int inputID = intInput() - 1;
+        Guest guest = dataBase.getGuestList().get(inputID);
+
         System.out.println();
         System.out.println("======================================================");
         System.out.println("       1. Change first name of guest");
@@ -399,15 +493,19 @@ public class Menu {
         switch (stringInput()) {
             case "1":
                 System.out.println("Changing first name of guest" + "\n");
+                guest.setFirstName(stringInput());
                 break;
             case "2":
                 System.out.println("changing last name of guest" + "\n");
+                guest.setLastName(stringInput());
                 break;
             case "3":
                 System.out.println("changing phone number of guest" + "\n");
+                guest.setPhoneNumber(stringInput());
                 break;
             case "4":
                 System.out.println("Changing address of guest" + "\n");
+                guest.setAddress(stringInput());
                 break;
             case "":
                 administerGuest();
@@ -418,9 +516,12 @@ public class Menu {
                 manageGuest();
                 break;
         }
+
+        //We save the updated dataBase into File
+        FileIo.databaseSerialization(dataBase);
+
         //returns to administer guest menu
         administerGuest();
-
     }
 
     public void removeGuest() {
@@ -462,64 +563,11 @@ public class Menu {
         return input;
     }
 
-    public int intInput(){
+    public int intInput() {
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
         return input;
     }
-
-    public int createStaffID(ArrayList<Staff> staffList){
-        int id = -1;
-        int checkId = 1;
-
-        for (Staff staff : staffList) {
-            if (checkId == staff.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
-            }
-        }
-        if (id == -1) {
-            id = staffList.size()+1;
-        }
-        return id;
-    }
-
-    public int createGuestID(ArrayList<Guest> guestList){
-        int id = -1;
-        int checkId = 1;
-
-        for (Guest guest: guestList) {
-            if (checkId == guest.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
-            }
-        }
-        if (id == -1) {
-            id = guestList.size()+1;
-        }
-        return id;
-    }
-
-    public int createBookingID(ArrayList<Booking> bookingList){
-        int id = -1;
-        int checkId = 1;
-
-        for (Booking booking: bookingList) {
-            if (checkId == booking.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
-            }
-        }
-        if (id == -1) {
-            id = bookingList.size()+1;
-        }
-        return id;
-    }
-
-
 }
 
 
