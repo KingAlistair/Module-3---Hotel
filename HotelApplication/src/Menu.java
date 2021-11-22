@@ -1,7 +1,6 @@
-import javax.xml.crypto.Data;
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Menu {
     //--------------------------------MAIN MENU------------------------------------------
@@ -37,6 +36,7 @@ public class Menu {
             case "r":
                 DataBase dataBase = new DataBase();
                 FileIo.databaseSerialization(dataBase);
+                System.out.println("Database has been reset!");
                 mainMenu();
                 break;
 
@@ -124,8 +124,7 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = bookingList.size() + 1;
-        String stringId = Integer.toString(id);
+        int id = createBookingID(bookingList);
 
         Booking booking = new Booking(id, guestList, room, startDate, endDate);
 
@@ -195,7 +194,9 @@ public class Menu {
         Staff.printStaffList(staffList);
 
         //chose ID of staff we want to change
-        Staff staff = dataBase.getStaffList().get(0);
+        System.out.println("Chose the ID of the Staff you want to administer: ");
+        int inputID = intInput()-1;
+        Staff staff = dataBase.getStaffList().get(inputID);
 
         System.out.println();
         System.out.println("======================================================");
@@ -232,6 +233,7 @@ public class Menu {
             case "5":
                 System.out.println("Input new salary");
                 staff.setSalary(doubleInput());
+                break;
 
             case "":
                 administerStaff();
@@ -267,20 +269,7 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = -1;
-        int checkId = 1;
-
-        for (Staff staff : staffList
-        ) {
-            if (checkId == staff.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
-            }
-        }
-        if (id == -1) {
-            id = staffList.size()+1;
-        }
+        int id = createStaffID(staffList);
 
         Staff staff = new Staff(id, firstName, lastName, title, salary, phoneNumber);
 
@@ -383,20 +372,8 @@ public class Menu {
         System.out.println("======================================================");
 
         //Create Id
-        int id = -1;
-        int checkId = 1;
+        int id = createGuestID(guestList);
 
-        for (Guest guest : guestList
-        ) {
-            if (checkId == guest.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
-            }
-        }
-        if (id == -1) {
-            id = guestList.size()+1;
-        }
         Guest guest = new Guest(id, firstName, lastName, address, phoneNumber);
 
         //Saving it into file
@@ -490,6 +467,58 @@ public class Menu {
         int input = scanner.nextInt();
         return input;
     }
+
+    public int createStaffID(ArrayList<Staff> staffList){
+        int id = -1;
+        int checkId = 1;
+
+        for (Staff staff : staffList) {
+            if (checkId == staff.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = staffList.size()+1;
+        }
+        return id;
+    }
+
+    public int createGuestID(ArrayList<Guest> guestList){
+        int id = -1;
+        int checkId = 1;
+
+        for (Guest guest: guestList) {
+            if (checkId == guest.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = guestList.size()+1;
+        }
+        return id;
+    }
+
+    public int createBookingID(ArrayList<Booking> bookingList){
+        int id = -1;
+        int checkId = 1;
+
+        for (Booking booking: bookingList) {
+            if (checkId == booking.getId()) {
+                checkId++;
+            } else {
+                id = checkId;
+            }
+        }
+        if (id == -1) {
+            id = bookingList.size()+1;
+        }
+        return id;
+    }
+
 
 }
 

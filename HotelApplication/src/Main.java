@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -10,5 +7,6 @@ public class Main {
 }
 
 //To do list:
+//Organising lists according to ID
 //Do methods for manageGuest and manageStaff: to be able to change details of Guest and staff
 //Singleton pattern
