@@ -80,7 +80,15 @@ public class Room implements java.io.Serializable {
 
     public void setSuite(boolean suite) {
         this.suite = suite;
+
     }
 
-
+    @Override
+    public String toString() {
+        return "\nRoom: " + roomNumber + "\n" +
+                "Amount of beds: " + amountOfBeds + "\n " +
+                "Wifi" + wifi + "\n" +
+                "Price: " + price + "DKK\n" +
+                "Suite " + suite;
+    }
 }

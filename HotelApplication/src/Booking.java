@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Booking implements java.io.Serializable {
     private int id;
     private ArrayList<Guest> guestList;
@@ -76,5 +78,17 @@ public class Booking implements java.io.Serializable {
     public void setNumberOfNights(int numberOfNights) {
         this.numberOfNights = numberOfNights;
     }
+
+
+    public int calculateLengthOfStay(){
+        return (int) DAYS.between(getStartDate(), getEndDate());
+    }
+
+    public void printBookingInfo(){
+        double fullPrice = calculateLengthOfStay() * room.getPrice();
+        System.out.println("ID: " + id + "\n room" + room +  "\n startDate: " + startDate + "\n endDate: " + endDate +
+                " \n number of nights: " + calculateLengthOfStay() + " price: " + fullPrice);
+    }
+
 }
 

@@ -55,7 +55,8 @@ public class Menu {
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
 
-        //DataBase dataBase = FileIo.databaseDeserialization();
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
         System.out.println("              B O O K I N G  M E N U ");
@@ -74,6 +75,7 @@ public class Menu {
         switch (input) {
             case "1":
                 createBooking();
+                administerBooking();
                 break;
 
             case "2":
@@ -85,6 +87,11 @@ public class Menu {
 
             case "4":
                 System.out.println("Show all current bookings");
+                for (Booking booking : bookingList
+                     ) {
+                    booking.printBookingInfo();
+                }
+                administerBooking();
                 break;
 
             case "":
@@ -113,13 +120,36 @@ public class Menu {
         System.out.println("======================================================");
         //should we just get the room by the ID?
         System.out.println("            Please choose room number: ");
-        Room room = roomList.get(1);
-        System.out.println("            Please input name of Guest");
-        guestList.add(guestList.get(1));
-        System.out.println("            Please input check in date: ");
-        String startDate = stringInput();
-        System.out.println("            Please input check out date: ");
-        String endDate = stringInput();
+        // get user input to choose a room number
+        int roomNum = intInput();
+        Room room = null;
+
+        for (Room roomArr: roomList
+             ) {
+            if(roomNum == roomArr.getRoomNumber()){
+                room = roomArr;
+            }
+        }
+        //print out list of guests
+        Guest.printGuestList(guestList);
+        ArrayList<Guest> currentGuest = new ArrayList<>();
+
+        System.out.println("  Please input name of Guest");
+        // input the guest first name
+        Guest newGuest = null;
+        String guestName = stringInput();
+        for (Guest guestArr : guestList
+             ) {
+            if(guestName == guestArr.getFirstName()){
+               newGuest = guestArr;
+            }
+        }
+        currentGuest.add(newGuest);
+
+        System.out.println("            Please input start date : ");
+        int startDate = intInput();
+        System.out.println("            Please input end date: ");
+        int endDate = intInput();
 
         //should we perhaps calculate price and number of nights and just give the info?
         System.out.println("======================================================");
@@ -140,11 +170,13 @@ public class Menu {
             id = bookingList.size() + 1;
         }
 
-        LocalDate start = LocalDate.of(2015,02,12);
-        LocalDate end = LocalDate.of(2016,01,10);
+        LocalDate start = LocalDate.of(2015,02,startDate);
+        LocalDate end = LocalDate.of(2016,01,endDate);
 
-        Booking booking = new Booking(id, guestList, room, start, end);
+        Booking booking = new Booking(id, currentGuest , room, start, end);
+        booking.printBookingInfo();
         bookingList.add(booking);
+
 
         //Organize bookingList
         ArrayList<Integer> idList = new ArrayList<>();
