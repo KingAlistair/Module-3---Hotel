@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -139,7 +140,10 @@ public class Menu {
             id = bookingList.size() + 1;
         }
 
-        Booking booking = new Booking(id, guestList, room, startDate, endDate);
+        LocalDate start = LocalDate.of(2015,02,12);
+        LocalDate end = LocalDate.of(2016,01,10);
+
+        Booking booking = new Booking(id, guestList, room, start, end);
         bookingList.add(booking);
 
         //Organize bookingList
