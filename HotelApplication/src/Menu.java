@@ -1,3 +1,4 @@
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -199,6 +200,35 @@ public class Menu {
 
         //returns to administer booking
         administerBooking();
+    }
+
+    public void deleteBooking() {
+        //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+        ArrayList<Room> roomList = dataBase.getRoomList();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
+
+        System.out.println("Booking list: ");
+        //why wont it let me get the method?!?!??! >:(
+
+
+
+        System.out.println("Chose the ID of the booking you wish to remove: ");
+        int ID = intInput();
+
+
+        //remove if: for each guest, remove guest which equals the ID input by user
+        bookingList.removeIf(booking -> booking.getId() == (ID));
+        //we then set the guestList
+        dataBase.setBookingList(bookingList);
+        //and serialise it
+        FileIo.databaseSerialization(dataBase);
+
+        System.out.println("Booking has now been removed!");
+
+        //returns to administer guest menu
+        administerGuest();
     }
 
 
@@ -604,6 +634,7 @@ public class Menu {
         int input = scanner.nextInt();
         return input;
     }
+
 }
 
 

@@ -23,6 +23,7 @@ public class Booking implements java.io.Serializable {
         this.numberOfNights = 0;
     }
 
+
     public int getId() {
         return id;
     }
