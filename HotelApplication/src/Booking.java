@@ -89,6 +89,7 @@ public class Booking implements java.io.Serializable {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
         System.out.println("----------------------------------------------" + "\n" +
                            "Booking ID: " + id + "\n" +
+                           "Guest: " + //how do we get current guest
                             room + "\n" +
                            "Check in: " + startDate + "\n" +
                            "Check out: " + endDate +"\n" +
