@@ -228,7 +228,7 @@ public class Menu {
         System.out.println("Booking has now been removed!");
 
         //returns to administer guest menu
-        administerGuest();
+        administerBooking();
     }
 
 
