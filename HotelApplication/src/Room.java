@@ -22,9 +22,9 @@ public class Room implements java.io.Serializable {
         System.out.println("====================" +
                 "\nRoom: " + roomNumber + "\n" +
                   "Amount of beds: " + amountOfBeds + "\n " +
-                  "Wifi" + wifi + "\n" +
+                  "Wifi: " + wifi + "\n" +
                   "Price: " + price + "DKK\n" +
-                  "Suite " + suite
+                  "Suite: " + suite
         );
     }
 
@@ -87,8 +87,8 @@ public class Room implements java.io.Serializable {
     public String toString() {
         return "\nRoom: " + roomNumber + "\n" +
                 "Amount of beds: " + amountOfBeds + "\n " +
-                "Wifi" + wifi + "\n" +
+                "Wifi: " + wifi + "\n" +
                 "Price: " + price + "DKK\n" +
-                "Suite " + suite;
+                "Suite: " + suite;
     }
 }

@@ -1,4 +1,3 @@
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,14 +83,12 @@ public class Menu {
                 break;
             case "3":
                 System.out.println("Delete booking");
+                deleteBooking();
                 break;
 
             case "4":
                 System.out.println("Show all current bookings");
-                for (Booking booking : bookingList
-                     ) {
-                    booking.printBookingInfo();
-                }
+                Booking.printBookingList(dataBase.getBookingList());
                 administerBooking();
                 break;
 
@@ -132,7 +129,7 @@ public class Menu {
             }
         }
         //print out list of guests
-        Guest.printGuestList(guestList);
+        //Guest.printGuestList(guestList); - Why do we print here?
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
         System.out.println("  Please input name of Guest");
@@ -171,11 +168,11 @@ public class Menu {
             id = bookingList.size() + 1;
         }
 
-        LocalDate start = LocalDate.of(2015,02,startDate);
-        LocalDate end = LocalDate.of(2016,01,endDate);
+        LocalDate start = LocalDate.of(2021,12,startDate);
+        LocalDate end = LocalDate.of(2021,12,endDate);
 
         Booking booking = new Booking(id, currentGuest , room, start, end);
-        booking.printBookingInfo();
+        booking.printBooking();
         bookingList.add(booking);
 
 
@@ -203,6 +200,7 @@ public class Menu {
     }
 
     public void deleteBooking() {
+
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
@@ -210,7 +208,8 @@ public class Menu {
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("Booking list: ");
-        //why wont it let me get the method?!?!??! >:(
+        Booking.printBookingList(bookingList);
+        //why wont it let me get the method?!?!??!     But it does >:)
 
 
 

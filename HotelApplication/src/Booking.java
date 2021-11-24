@@ -81,15 +81,20 @@ public class Booking implements java.io.Serializable {
     }
 
 
-    public int calculateLengthOfStay(){
+    public int calculateLengthOfStay() {
         return (int) DAYS.between(getStartDate(), getEndDate());
     }
 
-    public void printBookingInfo(){
+    public void printBooking() {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
-        System.out.println("ID: " + id + "\n room" + room +  "\n startDate: " + startDate + "\n endDate: " + endDate +
-                " \n number of nights: " + calculateLengthOfStay() + " price: " + fullPrice);
+        System.out.println("ID: " + id + "\n room" + room + "\n startDate: " + startDate + "\n endDate: " + endDate +
+                " \n number of nights: " + calculateLengthOfStay() + " price: " + fullPrice + "\n");
     }
 
+    public static void printBookingList(ArrayList<Booking> bookingList) {
+        for (Booking booking : bookingList) {
+            booking.printBooking();
+        }
+    }
 }
 
