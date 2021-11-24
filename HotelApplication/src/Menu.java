@@ -79,7 +79,7 @@ public class Menu {
                 break;
 
             case "2":
-                System.out.println("Manage booking");
+                manageBooking();
                 break;
             case "3":
                 deleteBooking();
@@ -197,6 +197,58 @@ public class Menu {
         administerBooking();
     }
 
+    public void manageBooking() {
+
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+        ArrayList<Room> roomList = dataBase.getRoomList();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
+
+        //chose ID of staff we want to change
+        System.out.println("Chose the ID of the Booking you want to change: ");
+        int inputID = intInput() - 1;
+        Booking booking = dataBase.getBookingList().get(inputID);
+
+        System.out.println();
+        System.out.println("======================================================");
+        System.out.println("            1. Change name of guest");
+        System.out.println("            2. Change room"         );
+        System.out.println("            3. Change check in date");
+        System.out.println("            4. Change check out date" + "\n");
+        System.out.println("      Press enter to exit to administer booking");
+        System.out.println("======================================================");
+        System.out.println();
+
+        switch (stringInput()) {
+            case "1":
+                System.out.println("Please input new guest" + "\n");
+                break;
+            case "2":
+                System.out.println("Please input new room \n");
+                break;
+            case "3":
+                System.out.println("Please input new check in date \n");
+                break;
+            case "4":
+                System.out.println("Please input new check out date" + "\n");
+                break;
+            case "":
+                administerBooking();
+                break;
+
+            default:
+                System.out.println("Wrong input, please try again! ");
+                manageBooking();
+                break;
+        }
+
+        //We save the updated dataBase into File
+        FileIo.databaseSerialization(dataBase);
+
+        //returns to administer guest menu
+        administerBooking();
+    }
+
     public void deleteBooking() {
 
         //Get database from file
@@ -302,26 +354,26 @@ public class Menu {
         );
         switch (stringInput()) {
             case "1":
-                System.out.println("Input new first name");
+                System.out.println("Please input new first name");
                 staff.setFirstName(stringInput());
                 manageStaff();
                 break;
             case "2":
-                System.out.println("Input new last name");
+                System.out.println("Please input new last name");
                 staff.setLastName(stringInput());
                 manageStaff();
                 break;
             case "3":
-                System.out.println("Input new title");
+                System.out.println("Please input new title");
                 staff.setTitle(stringInput());
                 manageStaff();
                 break;
             case "4":
-                System.out.println("Input new phone number");
+                System.out.println("Please input new phone number");
                 staff.setPhoneNumber(stringInput());
                 break;
             case "5":
-                System.out.println("Input new salary");
+                System.out.println("Please input new salary");
                 staff.setSalary(doubleInput());
                 break;
 
@@ -402,6 +454,7 @@ public class Menu {
         //Return main menu
         administerStaff();
     }
+
 
     public void removeStaff() {
         //Get database from file
@@ -556,19 +609,19 @@ public class Menu {
 
         switch (stringInput()) {
             case "1":
-                System.out.println("Changing first name of guest" + "\n");
+                System.out.println("Please input new first name of guest" + "\n");
                 guest.setFirstName(stringInput());
                 break;
             case "2":
-                System.out.println("changing last name of guest" + "\n");
+                System.out.println("Please input new last name of guest" + "\n");
                 guest.setLastName(stringInput());
                 break;
             case "3":
-                System.out.println("changing phone number of guest" + "\n");
+                System.out.println("Please input new phone number of guest" + "\n");
                 guest.setPhoneNumber(stringInput());
                 break;
             case "4":
-                System.out.println("Changing address of guest" + "\n");
+                System.out.println("Please input new address of guest" + "\n");
                 guest.setAddress(stringInput());
                 break;
             case "":
