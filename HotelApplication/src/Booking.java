@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -96,6 +98,24 @@ public class Booking implements java.io.Serializable {
                            "Amount of nights: " + calculateLengthOfStay() + "\n" +
                            "Full price: " + fullPrice + "DKK" + "\n" +
                            "----------------------------------------------");
+    }
+
+    public void bookingReceipt(){
+        double fullPrice = calculateLengthOfStay() * room.getPrice();
+        System.out.println(
+                "----------------------------------------------" + "\n" +
+                    "H O T E L  M Å S K E P A R A D I S E"       + "\n"  +
+                "----------------------------------------------" + "\n" +
+                "Booking ID: " + id + "\n" +
+                "Guest: " + //how do we get current guest
+                 room + "\n" +
+                "Check in: " + startDate + "\n" +
+                "Check out: " + endDate +"\n" +
+                "Amount of nights: " + calculateLengthOfStay() + "\n" +
+                "----------------------------------------------" +
+                "Full price: " + fullPrice + "DKK" + "\n" +
+                "----------------------------------------------");
+
     }
 
     public static void printBookingList(ArrayList<Booking> bookingList) {

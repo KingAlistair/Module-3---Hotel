@@ -230,6 +230,9 @@ public class Menu {
                 //HALLØJ WHYY ME
                 int inputIDD = intInput() - 1;
                 Guest guest = dataBase.getGuestList().get(inputIDD);
+                //either we chose guest from id, or we create new first and last name? What do you think?
+                /*guest.setFirstName(stringInput());
+                guest.setLastName(stringInput());*/
                 break;
             case "2":
                 System.out.println("Please input new room \n");

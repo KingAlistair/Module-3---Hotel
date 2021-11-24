@@ -9,7 +9,6 @@ public class Main {
 //To do list:
 
 //Singleton pattern
-//create delete booking method
 //create method to manage booking
 //create bookings for more than one guest
 //Inheritance for room (?)
