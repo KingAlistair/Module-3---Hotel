@@ -144,9 +144,9 @@ public class Menu {
         }
         currentGuest.add(newGuest);
 
-        System.out.println("Please input start date : ");
+        System.out.println("Please input start date");
         int startDate = intInput();
-        System.out.println("Please input end date: ");
+        System.out.println("Please input end date");
         int endDate = intInput();
 
         //should we perhaps calculate price and number of nights and just give the info?
