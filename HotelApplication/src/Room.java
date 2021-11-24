@@ -85,10 +85,11 @@ public class Room implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "\nRoom: " + roomNumber + "\n" +
+        return "\n" +
+                "Room: " + roomNumber + "\n" +
                 "Amount of beds: " + amountOfBeds + "\n " +
-                "Wifi" + wifi + "\n" +
-                "Price: " + price + "DKK\n" +
-                "Suite " + suite;
+                "Wifi: " + wifi + "\n" +
+                "Price per nights: " + price + "DKK\n" +
+                "Suite: " + suite;
     }
 }
