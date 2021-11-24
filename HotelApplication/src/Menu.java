@@ -204,8 +204,7 @@ public class Menu {
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
-        //HALLØJ WHYY ME
-        Guest guest = dataBase.getGuestList().get();
+
 
         //chose ID of booking we want to change
         Booking.printBookingList(bookingList);
@@ -228,7 +227,11 @@ public class Menu {
             case "1":
                 Guest.printGuestList(guestList);
                 System.out.println("Please input new guest" + "\n");
-
+                //HALLØJ WHYY ME
+                int inputIDD = intInput() - 1;
+                Guest guest = dataBase.getGuestList().get(inputIDD);
+                guest.setFirstName(stringInput());
+                guest.setLastName(stringInput());
                 break;
             case "2":
                 System.out.println("Please input new room \n");
