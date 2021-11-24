@@ -203,6 +203,7 @@ public class Menu {
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
+        ArrayList<Guest> currentGuest = new ArrayList<>();
 
         //chose ID of booking we want to change
         System.out.println("Chose the ID of the Booking you want to change: ");
