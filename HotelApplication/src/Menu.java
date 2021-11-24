@@ -127,7 +127,7 @@ public class Menu {
             }
         }
         //print out list of guests
-        Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from
+        Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from - couldn't we just put the creating guest method here?
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
         System.out.println("Please input name of Guest");
