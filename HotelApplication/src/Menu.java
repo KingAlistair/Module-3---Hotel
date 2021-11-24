@@ -226,12 +226,10 @@ public class Menu {
         switch (stringInput()) {
             case "1":
                 Guest.printGuestList(guestList);
-                System.out.println("Please input new guest" + "\n");
+                System.out.println("Please input id of new guest" + "\n");
                 //HALLØJ WHYY ME
                 int inputIDD = intInput() - 1;
                 Guest guest = dataBase.getGuestList().get(inputIDD);
-                guest.setFirstName(stringInput());
-                guest.setLastName(stringInput());
                 break;
             case "2":
                 System.out.println("Please input new room \n");
