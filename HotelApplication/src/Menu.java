@@ -54,9 +54,7 @@ public class Menu {
 
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
-
         DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
         System.out.println("              B O O K I N G  M E N U ");
@@ -130,22 +128,38 @@ public class Menu {
         Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from - couldn't we just put the creating guest method here?
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
-        System.out.println("Please input name of Guest");
-        // input the guest first name
-        Guest newGuest = null;
-        String guestName = stringInput();
-        for (Guest guestArr : guestList
-             ) {
-            if(guestName == guestArr.getFirstName()){
-               newGuest = guestArr;
-            }
-        }
-        currentGuest.add(newGuest);
+        //Choose the number of guests
+        System.out.println("How many guest?");
+        int numberOfGuests = intInput();
 
-        System.out.println("Please input check in date");
-        int startDate = intInput();
-        System.out.println("Please input check out date");
-        int endDate = intInput();
+        for (int i = 0; i < numberOfGuests; i++) {
+
+            System.out.println("Please input Id of Guest #" + (i+1));
+            Guest newGuest = null;
+            String userInput = stringInput();
+            for (Guest guest : guestList
+            ) {
+                if (Integer.parseInt(userInput) == guest.getId()){
+                    newGuest = guest;
+                }
+            }
+            currentGuest.add(newGuest);
+        }
+
+        System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+        System.out.println("Year:");
+        int startYear = intInput();
+        System.out.println("Month:");
+        int startMonth = intInput();
+        System.out.println("Day");
+        int startDay = intInput();
+        System.out.println("Please input check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+        System.out.println("Year:");
+        int endYear = intInput();
+        System.out.println("Month:");
+        int endMonth = intInput();
+        System.out.println("Day");
+        int endDay = intInput();
 
         //should we perhaps calculate price and number of nights and just give the info?
         System.out.println("======================================================");
@@ -166,8 +180,8 @@ public class Menu {
             id = bookingList.size() + 1;
         }
 
-        LocalDate start = LocalDate.of(2021,12,startDate);
-        LocalDate end = LocalDate.of(2021,12,endDate);
+        LocalDate start = LocalDate.of(startYear,startMonth,startDay);
+        LocalDate end = LocalDate.of(endYear,endMonth,endDay);
 
         Booking booking = new Booking(id, currentGuest , room, start, end);
         booking.printBooking();
@@ -215,24 +229,19 @@ public class Menu {
 
         System.out.println();
         System.out.println("======================================================");
-        System.out.println("            1. Change name of guest");
+       /* System.out.println("            1. Change name of guest");
         System.out.println("            2. Change room"         );
-        System.out.println("            3. Change check in date");
-        System.out.println("            4. Change check out date" + "\n");
+        System.out.println("            3. Change check in date"); */
+        System.out.println("            1. Change check out date" + "\n");
         System.out.println("      Press enter to exit to administer booking");
         System.out.println("======================================================");
         System.out.println();
 
         switch (stringInput()) {
-            case "1":
+            case "4":
                 Guest.printGuestList(guestList);
-                System.out.println("Please input id of new guest" + "\n");
-                //HALLØJ WHYY ME
-                int inputIDD = intInput() - 1;
-                Guest guest = dataBase.getGuestList().get(inputIDD);
-                //either we chose guest from id, or we create new first and last name? What do you think?
-                /*guest.setFirstName(stringInput());
-                guest.setLastName(stringInput());*/
+                System.out.println("Please input id of new guest\n");
+
                 break;
             case "2":
                 System.out.println("Please input new room \n");
@@ -241,8 +250,30 @@ public class Menu {
             case "3":
                 System.out.println("Please input new check in date \n");
                 break;
-            case "4":
-                System.out.println("Please input new check out date" + "\n");
+            case "1":
+                booking.printBooking();
+
+                System.out.println("Please input new check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+                System.out.println("Year:");
+                int endYear = intInput();
+                System.out.println("Month:");
+                int endMonth = intInput();
+                System.out.println("Day:");
+                int endDay = intInput();
+                LocalDate newEndDate = LocalDate.of(endYear,endMonth,endDay);
+                booking.setEndDate(newEndDate);
+
+                for (int i = 0; i < bookingList.size(); i++) {
+                    if (booking.getId() == bookingList.get(i).getId()) {
+                        bookingList.set(i,booking);
+                    }
+                }
+                //Set bookingList
+                dataBase.setBookingList(bookingList);
+
+                //Save into file
+                FileIo.databaseSerialization(dataBase);
+
                 break;
             case "":
                 administerBooking();

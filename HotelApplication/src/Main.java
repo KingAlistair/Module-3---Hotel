@@ -15,3 +15,4 @@ public class Main {
 //check if dates have been used for bookings
 //print/ make nice receipt for ROOMS
 //create guest on booking
+//Limit how many guests can be chosen in booking

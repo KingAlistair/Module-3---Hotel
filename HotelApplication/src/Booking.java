@@ -25,7 +25,6 @@ public class Booking implements java.io.Serializable {
         this.numberOfNights = 0;
     }
 
-
     public int getId() {
         return id;
     }
@@ -90,31 +89,38 @@ public class Booking implements java.io.Serializable {
     public void printBooking() {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
         System.out.println("----------------------------------------------" + "\n" +
-                           "Booking ID: " + id + "\n" +
-                           "Guest: " + //how do we get current guest
-                            room + "\n" +
-                           "Check in: " + startDate + "\n" +
-                           "Check out: " + endDate +"\n" +
-                           "Amount of nights: " + calculateLengthOfStay() + "\n" +
-                           "Full price: " + fullPrice + "DKK" + "\n" +
-                           "----------------------------------------------");
+                "Booking ID: " + id + "\n" +
+                room + "\n" +
+                "Guest: ");
+
+        for (Guest guest: guestList
+             ) {
+            System.out.println(guest.getFirstName() + " " + guest.getLastName());
+        }
+
+        System.out.println(
+                "Check in: " + startDate + "\n" +
+                        "Check out: " + endDate + "\n" +
+                        "Amount of nights: " + calculateLengthOfStay() + "\n" +
+                        "Full price: " + fullPrice + "DKK" + "\n" +
+                        "----------------------------------------------");
     }
 
-    public void bookingReceipt(){
+    public void bookingReceipt() {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
         System.out.println(
                 "----------------------------------------------" + "\n" +
-                    "H O T E L  M Å S K E P A R A D I S E"       + "\n"  +
-                "----------------------------------------------" + "\n" +
-                "Booking ID: " + id + "\n" +
-                "Guest: " + //how do we get current guest
-                 room + "\n" +
-                "Check in: " + startDate + "\n" +
-                "Check out: " + endDate +"\n" +
-                "Amount of nights: " + calculateLengthOfStay() + "\n" +
-                "----------------------------------------------" +
-                "Full price: " + fullPrice + "DKK" + "\n" +
-                "----------------------------------------------");
+                        "H O T E L  M Å S K E P A R A D I S E" + "\n" +
+                        "----------------------------------------------" + "\n" +
+                        "Booking ID: " + id + "\n" +
+                        "Guest: " + //how do we get current guest
+                        room + "\n" +
+                        "Check in: " + startDate + "\n" +
+                        "Check out: " + endDate + "\n" +
+                        "Amount of nights: " + calculateLengthOfStay() + "\n" +
+                        "----------------------------------------------" +
+                        "Full price: " + fullPrice + "DKK" + "\n" +
+                        "----------------------------------------------");
 
     }
 
