@@ -117,7 +117,7 @@ public class Menu {
         //Create room
         System.out.println("======================================================");
         //should we just get the room by the ID?
-        System.out.println("            Please choose room number: ");
+        System.out.println("Please choose room number: ");
         // get user input to choose a room number
         int roomNum = intInput();
         Room room = null;
@@ -132,7 +132,7 @@ public class Menu {
         Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
-        System.out.println("  Please input name of Guest");
+        System.out.println("Please input name of Guest");
         // input the guest first name
         Guest newGuest = null;
         String guestName = stringInput();
@@ -144,9 +144,9 @@ public class Menu {
         }
         currentGuest.add(newGuest);
 
-        System.out.println("            Please input start date : ");
+        System.out.println("Please input start date : ");
         int startDate = intInput();
-        System.out.println("            Please input end date: ");
+        System.out.println("Please input end date: ");
         int endDate = intInput();
 
         //should we perhaps calculate price and number of nights and just give the info?
