@@ -5,28 +5,37 @@ public class Room implements java.io.Serializable {
     private int roomNumber;
     private int floor;
     private int amountOfBeds;
+    private String typeOfRoom;
     private boolean wifi;
     private double price;
-    private boolean suite;
 
-    public Room(int roomNumber, int floor, int amountOfBeds, boolean wifi, double price, boolean suite) {
+    public Room(int roomNumber, int floor, int amountOfBeds, String typeOfRoom, boolean wifi, double price) {
         this.roomNumber = roomNumber;
         this.floor = floor;
         this.amountOfBeds = amountOfBeds;
+        this.typeOfRoom = typeOfRoom;
         this.wifi = wifi;
         this.price = price;
-        this.suite = suite;
     }
 
     public void printRoom() {
         System.out.println("====================" +
                 "\nRoom: " + roomNumber + "\n" +
-                  "Amount of beds: " + amountOfBeds + "\n " +
-                  "Wifi: " + wifi + "\n" +
-                  "Price: " + price + "DKK\n" +
-                  "Suite: " + suite
+                "Amount of beds: " + amountOfBeds + "\n " +
+                "Wifi: " + booLeanToYes(wifi) + "\n" +
+                "Price: " + price + "DKK\n" +
+                "Room type: " + typeOfRoom
         );
     }
+
+    public String booLeanToYes(boolean wifi) {
+        if (wifi) {
+            return "yes";
+        } else {
+            return "no";
+        }
+    }
+
 
     public static void printRoomList(ArrayList<Room> roomList) {
         for (Room room : roomList) {
@@ -74,14 +83,6 @@ public class Room implements java.io.Serializable {
         this.price = price;
     }
 
-    public boolean isSuite() {
-        return suite;
-    }
-
-    public void setSuite(boolean suite) {
-        this.suite = suite;
-
-    }
 
     @Override
     public String toString() {
@@ -89,6 +90,6 @@ public class Room implements java.io.Serializable {
                 "Amount of beds: " + amountOfBeds + "\n" +
                 "Wifi: " + wifi + "\n" +
                 "Price per night: " + price + "DKK\n" +
-                "Suite: " + suite;
+                "Type: " + typeOfRoom;
     }
 }

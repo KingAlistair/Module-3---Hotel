@@ -57,13 +57,13 @@ public class DataBase implements java.io.Serializable {
     public static ArrayList<Room> defaultRoomList() {
         ArrayList<Room> roomList = new ArrayList<>();
 
-        Room room1 = new Room(66, 6, 3, true, 10666, true);
-        Room room2 = new Room(32, 3, 3, false, 323, false);
-        Room room3 = new Room(1, 1, 1, false, 100, true);
-        Room room4 = new Room(42, 4, 2, true, 4242, true);
-        Room room5 = new Room(24, 2, 1, false, 124, false);
-        Room room6 = new Room(69, 6, 1, true, 10669, true);
-        Room room7 = new Room(5, 5, 2, true, 5300, true);
+        Room room1 = new Room(66, 6, 3, "Suite", true, 10666);
+        Room room2 = new Room(32, 3, 3, "Single bed", false, 323);
+        Room room3 = new Room(1, 1, 1, "Single bed", false, 100);
+        Room room4 = new Room(42, 4, 2, "Double bed", true, 4242);
+        Room room5 = new Room(24, 2, 1,"Single bed", false, 124);
+        Room room6 = new Room(69, 6, 1, "Suite",true, 10669);
+        Room room7 = new Room(5, 5, 2, "Suite", true, 5300);
 
         roomList.add(room1);
         roomList.add(room2);
