@@ -129,7 +129,7 @@ public class Menu {
             }
         }
         //print out list of guests
-        //Guest.printGuestList(guestList); - Why do we print here?
+        Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
         System.out.println("  Please input name of Guest");
@@ -209,7 +209,8 @@ public class Menu {
 
         System.out.println("Booking list: ");
         Booking.printBookingList(bookingList);
-        //why wont it let me get the method?!?!??!     But it does >:)
+        //why wont it let me get the method?!?!??!     But it does >:) hehe thanks
+        Booking.printBookingList(bookingList);
 
 
 
