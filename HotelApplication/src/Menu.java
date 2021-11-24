@@ -204,7 +204,7 @@ public class Menu {
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
-        //chose ID of staff we want to change
+        //chose ID of booking we want to change
         System.out.println("Chose the ID of the Booking you want to change: ");
         int inputID = intInput() - 1;
         Booking booking = dataBase.getBookingList().get(inputID);
@@ -225,6 +225,7 @@ public class Menu {
                 break;
             case "2":
                 System.out.println("Please input new room \n");
+
                 break;
             case "3":
                 System.out.println("Please input new check in date \n");
@@ -245,7 +246,7 @@ public class Menu {
         //We save the updated dataBase into File
         FileIo.databaseSerialization(dataBase);
 
-        //returns to administer guest menu
+        //returns to administer booking menu
         administerBooking();
     }
 
