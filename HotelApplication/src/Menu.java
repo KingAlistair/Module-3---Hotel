@@ -117,7 +117,7 @@ public class Menu {
         //Create room
         System.out.println("======================================================");
         //should we just get the room by the ID?
-        System.out.println("Please choose room number: ");
+        System.out.println("Please choose room number");
         // get user input to choose a room number
         int roomNum = intInput();
         Room room = null;
@@ -144,9 +144,9 @@ public class Menu {
         }
         currentGuest.add(newGuest);
 
-        System.out.println("Please input start date");
+        System.out.println("Please input check in date");
         int startDate = intInput();
-        System.out.println("Please input end date");
+        System.out.println("Please input check out date");
         int endDate = intInput();
 
         //should we perhaps calculate price and number of nights and just give the info?
