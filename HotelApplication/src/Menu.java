@@ -75,19 +75,17 @@ public class Menu {
         switch (input) {
             case "1":
                 createBooking();
-                administerBooking();
+                administerBooking(); //do we need this when we already have it in the method?
                 break;
 
             case "2":
                 System.out.println("Manage booking");
                 break;
             case "3":
-                System.out.println("Delete booking");
                 deleteBooking();
                 break;
 
             case "4":
-                System.out.println("Show all current bookings");
                 Booking.printBookingList(dataBase.getBookingList());
                 administerBooking();
                 break;
