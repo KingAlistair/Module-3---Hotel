@@ -216,16 +216,16 @@ public class Menu {
         int ID = intInput();
 
 
-        //remove if: for each guest, remove guest which equals the ID input by user
+        //remove if: for each booking, remove booking which equals the ID input by user
         bookingList.removeIf(booking -> booking.getId() == (ID));
-        //we then set the guestList
+        //we then set the bookingList
         dataBase.setBookingList(bookingList);
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
         System.out.println("Booking has now been removed!");
 
-        //returns to administer guest menu
+        //returns to administer booking menu
         administerBooking();
     }
 
