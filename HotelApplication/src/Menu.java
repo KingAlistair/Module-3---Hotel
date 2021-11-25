@@ -729,11 +729,12 @@ public class Menu {
     public void administerRoom() {
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
-
         System.out.println("======================================================");
-        System.out.println("1. Print rooms");
-        System.out.println("2. Change room price");
-        System.out.println("   Press \"enter\" to exit to main menu ");
+        System.out.println("                 R O O M  M E N U");
+        System.out.println("======================================================");
+        System.out.println("                  1. Print rooms");
+        System.out.println("                  2. Change room price \n");
+        System.out.println("             Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
 
         String input = stringInput();
