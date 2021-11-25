@@ -106,21 +106,28 @@ public class Booking implements java.io.Serializable {
                         "----------------------------------------------");
     }
 
+    //can't really use this though ):
     public void bookingReceipt() {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
-        System.out.println(
-                "----------------------------------------------" + "\n" +
-                        "H O T E L  M Å S K E P A R A D I S E" + "\n" +
-                        "----------------------------------------------" + "\n" +
-                        "Booking ID: " + id + "\n" +
-                        "Guest: " + //how do we get current guest
-                        room + "\n" +
-                        "Check in: " + startDate + "\n" +
-                        "Check out: " + endDate + "\n" +
-                        "Amount of nights: " + calculateLengthOfStay() + "\n" +
-                        "----------------------------------------------" +
-                        "Full price: " + fullPrice + "DKK" + "\n" +
-                        "----------------------------------------------");
+
+        System.out.println("---------------------------------------------------"  );
+        System.out.println("|                                                 |");
+        System.out.println("|                                                 |");
+        System.out.println("| =============================================== |");
+        System.out.println("|      H O T E L   M Å S K E P A R A D I S E      |" );
+        System.out.println("| =============================================== |");
+        System.out.println("|  Booking ID: " + id + "                         |");
+        System.out.println("|  Guest: Some name" + "                          |" );
+        System.out.println("|"+ room  +"                                      |");
+        System.out.println("|  Check in: " + startDate + "                    |");
+        System.out.println("|  Check out: " + endDate + "                     |" );
+        System.out.println("|  Amount of nights: " + calculateLengthOfStay()+"|" );
+        System.out.println("| =============================================== |" );
+        System.out.println("|  Full price: " + fullPrice + "DKK" + "          |" );
+        System.out.println("| =============================================== |");
+        System.out.println("|                                                 |");
+        System.out.println("|                                                 |");
+        System.out.println("---------------------------------------------------"  );
 
     }
 
