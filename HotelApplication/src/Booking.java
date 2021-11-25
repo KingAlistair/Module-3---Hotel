@@ -117,8 +117,6 @@ public class Booking implements java.io.Serializable {
         System.out.println("|      H O T E L   M Å S K E P A R A D I S E      |" );
         System.out.println("| =============================================== |");
         System.out.println("|  Booking ID: " + id + "                         |");
-        System.out.println("|  Guest: Some name" + "                          |" );
-        System.out.println("|"+ room  +"                                      |");
         System.out.println("|  Check in: " + startDate + "                    |");
         System.out.println("|  Check out: " + endDate + "                     |" );
         System.out.println("|  Amount of nights: " + calculateLengthOfStay()+"|" );
