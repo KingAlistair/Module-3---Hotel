@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DataBase implements java.io.Serializable {
@@ -78,7 +79,30 @@ public class DataBase implements java.io.Serializable {
     }
 
     private static ArrayList<Booking> defaultBookingList(){
-        ArrayList bookingList = new ArrayList();
+        ArrayList<Booking> bookingList = new ArrayList();
+        ArrayList<Guest> guestList = defaultGuestList();
+        ArrayList<Room> roomList = defaultRoomList();
+
+        ArrayList<Guest> currentGuest = new ArrayList<>();
+        currentGuest.add(guestList.get(0));
+        currentGuest.add(guestList.get(7));
+
+        LocalDate startDate = LocalDate.of(2021,12,01);
+        LocalDate endDate = LocalDate.of(2021,12,02);
+
+        Booking booking1 = new Booking(1, currentGuest, roomList.get(5), startDate, endDate);
+
+        currentGuest = new ArrayList<>();
+        currentGuest.add(guestList.get(3));
+        currentGuest.add(guestList.get(4));
+
+        startDate = LocalDate.of(2021,12,02);
+        endDate = LocalDate.of(2021,12,06);
+
+        Booking booking2 = new Booking(2, currentGuest, roomList.get(5), startDate, endDate);
+
+        bookingList.add(booking1);
+        bookingList.add(booking2);
 
         return bookingList;
     }

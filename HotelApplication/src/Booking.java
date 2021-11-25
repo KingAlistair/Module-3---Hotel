@@ -110,28 +110,40 @@ public class Booking implements java.io.Serializable {
     public void bookingReceipt() {
         double fullPrice = calculateLengthOfStay() * room.getPrice();
 
-        System.out.println("---------------------------------------------------"  );
-        System.out.println("|                                                 |");
+        System.out.println("\"-------------------------------------------------\"");
+        System.out.println(String.format("%-50s%s" ,"|","|"));
+        System.out.println(String.format("%-50s%s" ,"|","|"));
         System.out.println("|                                                 |");
         System.out.println("| =============================================== |");
-        System.out.println("|      H O T E L   M Å S K E P A R A D I S E      |" );
+        System.out.println("|      H O T E L   M Å S K E P A R A D I S E      |");
         System.out.println("| =============================================== |");
-        System.out.println("|  Booking ID: " + id + "                         |");
-        System.out.println("|  Check in: " + startDate + "                    |");
-        System.out.println("|  Check out: " + endDate + "                     |" );
-        System.out.println("|  Amount of nights: " + calculateLengthOfStay()+"|" );
-        System.out.println("| =============================================== |" );
-        System.out.println("|  Full price: " + fullPrice + "DKK" + "          |" );
-        System.out.println("| =============================================== |");
-        System.out.println("|                                                 |");
-        System.out.println("|                                                 |");
-        System.out.println("---------------------------------------------------"  );
+        System.out.println(String.format("%-50s%s" ,"|  Booking ID: " + id, "|"));
+        System.out.println(String.format("%-50s%s" ,"|  Check in: " + startDate, "|"));
+        System.out.println(String.format("%-50s%s" ,"|  Check out: " + endDate, "|"));
+        if(guestList.size() > 1){
+            System.out.println("|  Guests:                                        |");
+        }
+        else{
+            System.out.println("|  Guest:                                         |");
+        }
+        for (int i = 0; i < guestList.size(); i++) {
+            System.out.println(String.format("%-50s%s" ,"|  " + (i + 1) + ": " + guestList.get(i).getFirstName() + " " + guestList.get(i).getLastName(), "|"));
+        }
 
+        System.out.println(String.format("%-50s%s" ,"|  Amount of nights: " + calculateLengthOfStay(), "|"));
+        System.out.println("| =============================================== |");
+        System.out.println(String.format("%-50s%s" ,"|  Full price: " + fullPrice + " DKK", "|"));
+        System.out.println("| =============================================== |");
+        System.out.println("|                                                 |");
+        System.out.println("|                                                 |");
+        System.out.println("|    Thank you for staying with Måskeparadise!    |");
+        System.out.println("|                                                 |");
+        System.out.println("\"-------------------------------------------------\"\n");
     }
 
     public static void printBookingList(ArrayList<Booking> bookingList) {
         for (Booking booking : bookingList) {
-            booking.printBooking();
+            booking.bookingReceipt();
         }
     }
 }

@@ -39,7 +39,7 @@ public class Menu {
                 break;
 
             case "r":
-               DataBase dataBase = new DataBase();
+                DataBase dataBase = new DataBase();
                 FileIo.databaseSerialization(dataBase);
                 System.out.println("Database has been reset!");
                 mainMenu();
@@ -59,6 +59,7 @@ public class Menu {
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
         DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
         System.out.println("              B O O K I N G  M E N U ");
@@ -66,7 +67,7 @@ public class Menu {
         System.out.println("              1. Create booking");
         System.out.println("              2. Manage booking");
         System.out.println("              3. Delete booking");
-        System.out.println("              4. Show all bookings (" + (dataBase.getBookingList().size())+ ")\n");
+        System.out.println("              4. Show all bookings (" + (dataBase.getBookingList().size()) + ")\n");
         System.out.println("         Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
         System.out.println();
@@ -81,6 +82,7 @@ public class Menu {
                 break;
 
             case "2":
+                Booking.printBookingList(bookingList);
                 manageBooking();
                 break;
             case "3":
@@ -88,7 +90,7 @@ public class Menu {
                 break;
 
             case "4":
-                Booking.printBookingList(dataBase.getBookingList());
+                Booking.printBookingList(bookingList);
                 administerBooking();
                 break;
 
@@ -231,35 +233,20 @@ public class Menu {
 
 
         //chose ID of booking we want to change
-        Booking.printBookingList(bookingList);
-
         System.out.println("Chose the ID of the Booking you want to change: ");
         int inputID = intInput() - 1;
         Booking booking = dataBase.getBookingList().get(inputID);
 
         System.out.println();
         System.out.println("======================================================");
-       /* System.out.println("            1. Change name of guest");
-        System.out.println("            2. Change room"         );
-        System.out.println("            3. Change check in date"); */
         System.out.println("            1. Change check out date" + "\n");
+        System.out.println("            2. Print booking" + "\n");
         System.out.println("      Press enter to exit to administer booking");
         System.out.println("======================================================");
         System.out.println();
 
         switch (stringInput()) {
-            case "4":
-                Guest.printGuestList(guestList);
-                System.out.println("Please input id of new guest\n");
 
-                break;
-            case "2":
-                System.out.println("Please input new room \n");
-
-                break;
-            case "3":
-                System.out.println("Please input new check in date \n");
-                break;
             case "1":
                 booking.printBooking();
 
@@ -283,8 +270,13 @@ public class Menu {
 
                 //Save into file
                 FileIo.databaseSerialization(dataBase);
-
+                booking.printBooking();
                 break;
+
+            case "2":
+                Booking.printBookingList(bookingList);
+                break;
+
             case "":
                 administerBooking();
                 break;
@@ -337,6 +329,8 @@ public class Menu {
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
         DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Staff> staffList = dataBase.getStaffList();
+
         System.out.println("======================================================");
         System.out.println("               S T A F F  M E N U ");
         System.out.println("======================================================");
@@ -357,6 +351,7 @@ public class Menu {
                 break;
 
             case "2":
+                Staff.printStaffList(staffList);
                 manageStaff();
                 break;
             case "3":
@@ -364,7 +359,7 @@ public class Menu {
                 break;
 
             case "4":
-                Staff.printStaffList(dataBase.getStaffList());
+                Staff.printStaffList(staffList);
                 administerStaff();
                 break;
 
@@ -385,8 +380,6 @@ public class Menu {
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
-        Staff.printStaffList(staffList);
-
         //chose ID of staff we want to change
         System.out.println("Chose the ID of the Staff you want to administer: ");
         int inputID = intInput() - 1;
@@ -401,24 +394,20 @@ public class Menu {
         System.out.println("       5. Change salary of staff member" + "\n");
         System.out.println("      Press enter to exit to administer staff");
         System.out.println("======================================================");
-        System.out.println(
+        System.out.println();
 
-        );
         switch (stringInput()) {
             case "1":
                 System.out.println("Please input new first name");
                 staff.setFirstName(stringInput());
-                manageStaff();
                 break;
             case "2":
                 System.out.println("Please input new last name");
                 staff.setLastName(stringInput());
-                manageStaff();
                 break;
             case "3":
                 System.out.println("Please input new title");
                 staff.setTitle(stringInput());
-                manageStaff();
                 break;
             case "4":
                 System.out.println("Please input new phone number");
@@ -439,8 +428,14 @@ public class Menu {
                 break;
         }
 
-        //
 
+        for (int i = 0; i < staffList.size(); i++) {
+            if (staff.getId() == staffList.get(i).getId()) {
+                staffList.set(i, staff);
+            }
+        }
+
+        dataBase.setStaffList(staffList);
         FileIo.databaseSerialization(dataBase);
 
         //returns to administer staff menu
@@ -522,7 +517,7 @@ public class Menu {
         int ID = intInput();
 
 
-        //remove if: for each staff, remove staff which equals the ID input by user
+        //remove if: for each staff, remove staff which equals the ID input by   user
         staffList.removeIf(staff -> staff.getId() == (ID));
         //we then set the staffList
         dataBase.setStaffList(staffList);
@@ -538,6 +533,8 @@ public class Menu {
     //-------------------------GUEST MENU PART------------------------------------------------------------------------
     public void administerGuest() {
         DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Guest> guestList = dataBase.getGuestList();
+
         System.out.println("======================================================");
         System.out.println("               G U E S T   M E N U ");
         System.out.println("======================================================");
@@ -556,7 +553,9 @@ public class Menu {
             case "1":
                 createGuest(true);
                 break;
+
             case "2":
+                Guest.printGuestList(guestList);
                 manageGuest();
                 break;
 
@@ -565,7 +564,7 @@ public class Menu {
                 break;
 
             case "4":
-                Guest.printGuestList(dataBase.getGuestList());
+                Guest.printGuestList(guestList);
                 administerGuest();
                 break;
 
@@ -692,7 +691,14 @@ public class Menu {
                 break;
         }
 
-
+        //The loop looks for the guest that's data is changed and sets it to the arraylist
+        for (int i = 0; i < guestList.size(); i++) {
+            if (guest.getId() == guestList.get(i).getId()) {
+                guestList.set(i, guest);
+            }
+        }
+        //Sets the guestList into the database
+        dataBase.setGuestList(guestList);
         //We save the updated dataBase into File
         FileIo.databaseSerialization(dataBase);
 
@@ -741,13 +747,12 @@ public class Menu {
 
         switch (input) {
             case "1":
-                for (Room room : roomList
-                ) {
-                    room.printRoom();
-                }
+                Room.printRoomList(roomList);
                 administerRoom();
                 break;
+
             case "2":
+                Room.printRoomList(roomList);
                 changePrice();
                 administerRoom();
                 break;
@@ -766,12 +771,6 @@ public class Menu {
     public void changePrice() {
         DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
-
-        //Print rooms
-        for (Room room : roomList
-        ) {
-            room.printRoom();
-        }
 
         //User chooses room
         System.out.println("Choose a room number");
@@ -801,7 +800,7 @@ public class Menu {
         FileIo.databaseSerialization(dataBase);
     }
 
-    //-------------------------Scanner sh!ts PART------------------------------------------------------------------------
+    //-------------------------Scanner PART------------------------------------------------------------------------
 
     //Method for user string input
     public String stringInput() {
