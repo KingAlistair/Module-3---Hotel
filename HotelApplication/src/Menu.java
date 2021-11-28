@@ -1,8 +1,12 @@
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Menu {
 
@@ -246,7 +250,7 @@ public class Menu {
         int id = -1;
         int checkId = 1;
 
-        //Going through booking list to findID
+        //Going through booking list to find missing ID
         for (Booking booking : bookingList) {
             if (checkId == booking.getId()) {
                 checkId++;
@@ -877,4 +881,6 @@ public class Menu {
         int input = scanner.nextInt();
         return input;
     }
+
+
 }
