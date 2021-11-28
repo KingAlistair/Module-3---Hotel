@@ -9,15 +9,25 @@ public class Main {
 
 //To do list:
 
-//Manage guest and manage staff changes does not save into database yet (booking and room they do)
-//Singleton pattern
-//Inheritance for room (?)
-//check if dates have been used for bookings
-//print/ make nice receipt for ROOMS
-//Limit how many guests can be chosen in booking
+//check if dates have been used for bookings //
 
+//Diagrams:
 
+//Use Case - finish it
+//Domain model - finish it
+//Use Case Descriptions (brief or fully dressed) - not done yet
+// Class diagram (reverse engineer) - not done it
+//System Sequence Diagram (2) (reverse engineer) - not done yet
+//Sequence Diagram (2) (reverse engineer) - not done yet
+//Stakeholder analysis - finish it
+//Swot analysis - finish it
+//Gantt chart - not done yet
+//Canvas model - not done yet
+//Risk analysis - not done yet
 
 //Extra list:
-//create guest in booking make nicer
+
 //Other manage booking options
+//Inheritance for room (?)
+
+//Send a mail to St. Christian about presentation day

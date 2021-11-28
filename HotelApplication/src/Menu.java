@@ -1,9 +1,17 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 public class Menu {
+
+    private DataBase dataBase;
+
+    public Menu(){
+        this.dataBase = FileIo.databaseDeserialization();
+    }
+
     //--------------------------------MAIN MENU------------------------------------------
     public void mainMenu() {
         System.out.println();
@@ -58,7 +66,6 @@ public class Menu {
 
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
@@ -108,50 +115,108 @@ public class Menu {
 
     public void createBooking() {
         //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
-
-        //Asks if new guest
-        System.out.println("Do you want to create a new guest for the booking? y/n");
-        String input = stringInput();
-        if (input.equalsIgnoreCase("y")) {
-            createGuest(false);
-        }
-
-        //print out list of guests
-        Guest.printGuestList(guestList); //- Why do we print here? to show the guestlist to choose from - couldn't we just put the creating guest method here?
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
         //Choose the number of guests
         System.out.println("How many guest would you like to add to the booking?");
+        System.out.println("Max guest allowed is 3!");
+
+
         int numberOfGuests = intInput();
+        if(numberOfGuests < 1 || numberOfGuests > 3){
+            System.out.println("Invalid input! Try again!");
+            createBooking();
+        }
 
         for (int i = 0; i < numberOfGuests; i++) {
-
-            System.out.println("Please input Id of Guest #" + (i + 1));
             Guest newGuest = null;
-            String userInput = stringInput();
-            for (Guest guest : guestList
-            ) {
-                if (Integer.parseInt(userInput) == guest.getId()) {
-                    newGuest = guest;
+            //Asks if new guest
+            System.out.println("Do you want to create a new guest for the booking? y/n");
+            String input = stringInput();
+
+            if (input.equalsIgnoreCase("y")) {
+                //Create Guest
+                System.out.println("======================================================");
+                System.out.println("            Please input first name: ");
+                String firstName = stringInput();
+                System.out.println("            Please input last name: ");
+                String lastName = stringInput();
+                System.out.println("            Please input address: ");
+                String address = stringInput();
+                System.out.println("            Please input phone number: ");
+                String phoneNumber = stringInput();
+                System.out.println("======================================================");
+
+                //Create Id
+                int id = -1;
+                int checkId = 1;
+
+                //Going through guestList to find ID
+                for (Guest guest : guestList) {
+                    if (checkId == guest.getId()) {
+                        checkId++;
+                    } else {
+                        id = checkId;
+                    }
                 }
+                if (id == -1) {
+                    id = guestList.size() + 1;
+                }
+
+                Guest guest = new Guest(id, firstName, lastName, address, phoneNumber);
+                guestList.add(guest);
+
+                //Organize staffList
+                ArrayList<Integer> idList = new ArrayList<>();
+                for (Guest g : guestList) {
+                    idList.add(g.getId());
+                }
+                Collections.sort(idList);
+                ArrayList<Guest> organisedGuestList = new ArrayList<>();
+                for (int x : idList) {
+                    for (Guest g : guestList) {
+                        if (x == g.getId()) {
+                            organisedGuestList.add(g);
+                        }
+                    }
+                }
+               currentGuest.add(guest);
+            } else {
+                //print out list of guests
+                Guest.printGuestList(guestList);
+                System.out.println("Please input Id of Guest #" + (i + 1));
+
+                String userInput = stringInput();
+                for (Guest guest : guestList
+                ) {
+                    if (Integer.parseInt(userInput) == guest.getId()) {
+                        newGuest = guest;
+                    }
+                } currentGuest.add(newGuest);
             }
-            currentGuest.add(newGuest);
         }
-        Room.printRoomList(roomList);
+
 
         //Create room
+        ArrayList<Room> availableRooms = new ArrayList<>();
+        for (Room room: roomList
+             ) {
+            if(numberOfGuests == room.getAmountOfBeds()){
+                availableRooms.add(room);
+            }
+        }
         System.out.println("======================================================");
+          Room.printRoomList(availableRooms);
         //should we just get the room by the ID?
         System.out.println("Please choose room number");
         // get user input to choose a room number
         int roomNum = intInput();
         Room room = null;
 
-        for (Room roomArr : roomList
+        for (Room roomArr : availableRooms
         ) {
             if (roomNum == roomArr.getRoomNumber()) {
                 room = roomArr;
@@ -197,8 +262,10 @@ public class Menu {
         LocalDate end = LocalDate.of(endYear, endMonth, endDay);
 
         Booking booking = new Booking(id, currentGuest, room, start, end);
-        booking.printBooking();
+        booking.setGuestList(currentGuest);
+        booking.bookingReceipt();
         bookingList.add(booking);
+
 
 
         //Organize bookingList
@@ -225,8 +292,6 @@ public class Menu {
     }
 
     public void manageBooking() {
-
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
@@ -297,7 +362,6 @@ public class Menu {
     public void deleteBooking() {
 
         //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
@@ -328,7 +392,6 @@ public class Menu {
 
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         System.out.println("======================================================");
@@ -377,7 +440,7 @@ public class Menu {
 
     public void manageStaff() {
         //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
+       // DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //chose ID of staff we want to change
@@ -445,7 +508,6 @@ public class Menu {
     //Creates staff, save it into file
     public void createStaff() {
         //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //Create Staff
@@ -582,7 +644,6 @@ public class Menu {
     //Creates guest, save it into file
     public void createGuest(boolean guestMenu) {
         //Get database from file
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
 
         //Create Guest
@@ -638,10 +699,7 @@ public class Menu {
         if (guestMenu) {
             //Return to main menu
             administerGuest();
-        } else {
-            createBooking();
         }
-
     }
 
     public void manageGuest() {
@@ -733,7 +791,6 @@ public class Menu {
     //-------------------------Room MENU PART------------------------------------------------------------------------
 
     public void administerRoom() {
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
         System.out.println("======================================================");
         System.out.println("                 R O O M  M E N U");
@@ -769,7 +826,6 @@ public class Menu {
     }
 
     public void changePrice() {
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
 
         //User chooses room
