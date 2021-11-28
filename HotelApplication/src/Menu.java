@@ -114,7 +114,7 @@ public class Menu {
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         //Asks if new guest
-        System.out.println("Is it a new guest? y/n");
+        System.out.println("Do you want to create a new guest for the booking? y/n");
         String input = stringInput();
         if (input.equalsIgnoreCase("y")) {
             createGuest(false);
@@ -125,7 +125,7 @@ public class Menu {
         ArrayList<Guest> currentGuest = new ArrayList<>();
 
         //Choose the number of guests
-        System.out.println("How many guest?");
+        System.out.println("How many guest would you like to add to the booking?");
         int numberOfGuests = intInput();
 
         for (int i = 0; i < numberOfGuests; i++) {
