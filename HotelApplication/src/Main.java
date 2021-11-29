@@ -25,12 +25,11 @@ public class Main {
 
 //Use Case - finish it
 //Domain model - finish it
+
 //Use Case Descriptions (brief or fully dressed) - not done yet
-// Class diagram (reverse engineer) - not done it
-//System Sequence Diagram (2) (reverse engineer) - not done yet
-//Sequence Diagram (2) (reverse engineer) - not done yet
-//Stakeholder analysis - finish it
-//Swot analysis - finish it
+// Class diagram (reverse engineer) - not done it discuss which
+//System Sequence Diagram (2) (reverse engineer) - not done yet (discuss which)
+//Sequence Diagram (2) (reverse engineer) - not done yet (discuss which)
 //Gantt chart - not done yet
 //Canvas model - not done yet
 //Risk analysis - not done yet
