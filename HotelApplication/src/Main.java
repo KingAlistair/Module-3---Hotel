@@ -26,11 +26,10 @@ public class Main {
 //Use Case - finish it
 //Domain model - finish it
 
-//Use Case Descriptions (brief or fully dressed) - not done yet
+//Use Case Descriptions (brief or fully dressed) - finish it
 // Class diagram (reverse engineer) - not done it
-//System Sequence Diagram (2) (reverse engineer) - not done yet (discuss which)
-//Sequence Diagram (2) (reverse engineer) - not done yet (discuss which)
-//Gantt chart - not done yet
+
+//Gantt chart - finish it
 //Canvas model - not done yet
 //Risk analysis - not done yet
 
@@ -39,4 +38,3 @@ public class Main {
 //Other manage booking options
 //Inheritance for room (?)
 
-//Send a mail to St. Christian about presentation day

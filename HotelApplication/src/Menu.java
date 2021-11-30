@@ -707,8 +707,6 @@ public class Menu {
     }
 
     public void manageGuest() {
-
-        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
 
         //chose ID of staff we want to change
