@@ -11,11 +11,6 @@ import java.util.stream.IntStream;
 
 public class Menu {
 
-    private DataBase dataBase;
-
-    public Menu() {
-        this.dataBase = FileIo.databaseDeserialization();
-    }
 
     //--------------------------------MAIN MENU------------------------------------------
     public void mainMenu() {
@@ -52,8 +47,8 @@ public class Menu {
                 break;
 
             case "r":
-                DataBase dataBase2 = new DataBase();
-                FileIo.databaseSerialization(dataBase2);
+                DataBase dataBase = new DataBase();
+                FileIo.databaseSerialization(dataBase);
                 System.out.println("Database has been reset!");
                 mainMenu();
                 break;
@@ -72,6 +67,7 @@ public class Menu {
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
 
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
@@ -121,6 +117,7 @@ public class Menu {
 
     public void createBooking() {
         //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
@@ -350,6 +347,7 @@ public class Menu {
     }
 
     public void manageBooking() {
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
@@ -420,6 +418,7 @@ public class Menu {
     public void deleteBooking() {
 
         //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
         ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
@@ -450,6 +449,7 @@ public class Menu {
 
     //-------------------------------STAFF MENU PART----------------------------------------
     public void administerStaff() {
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         System.out.println("======================================================");
@@ -498,7 +498,7 @@ public class Menu {
 
     public void manageStaff() {
         //Get database from file
-        // DataBase dataBase = FileIo.databaseDeserialization();
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //chose ID of staff we want to change
@@ -566,6 +566,7 @@ public class Menu {
     //Creates staff, save it into file
     public void createStaff() {
         //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //Create Staff
@@ -702,6 +703,7 @@ public class Menu {
     //Creates guest, save it into file
     public void createGuest(boolean guestMenu) {
         //Get database from file
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
 
         //Create Guest
@@ -761,6 +763,7 @@ public class Menu {
     }
 
     public void manageGuest() {
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Guest> guestList = dataBase.getGuestList();
 
         //chose ID of staff we want to change
@@ -847,6 +850,7 @@ public class Menu {
     //-------------------------Room MENU PART------------------------------------------------------------------------
 
     public void administerRoom() {
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
         System.out.println("======================================================");
         System.out.println("                 R O O M  M E N U");
@@ -882,6 +886,7 @@ public class Menu {
     }
 
     public void changePrice() {
+        DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Room> roomList = dataBase.getRoomList();
 
         //User chooses room
