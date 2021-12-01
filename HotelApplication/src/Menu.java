@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -12,7 +13,7 @@ public class Menu {
 
     private DataBase dataBase;
 
-    public Menu(){
+    public Menu() {
         this.dataBase = FileIo.databaseDeserialization();
     }
 
@@ -70,6 +71,7 @@ public class Menu {
 
     //------------------------------BOOKING MENU PART--------------------------------------
     public void administerBooking() {
+
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("======================================================");
@@ -130,7 +132,7 @@ public class Menu {
 
 
         int numberOfGuests = intInput();
-        if(numberOfGuests < 1 || numberOfGuests > 3){
+        if (numberOfGuests < 1 || numberOfGuests > 3) {
             System.out.println("Invalid input! Try again!");
             createBooking();
         }
@@ -187,7 +189,7 @@ public class Menu {
                         }
                     }
                 }
-               currentGuest.add(guest);
+                currentGuest.add(guest);
             } else {
                 //print out list of guests
                 Guest.printGuestList(guestList);
@@ -199,21 +201,22 @@ public class Menu {
                     if (Integer.parseInt(userInput) == guest.getId()) {
                         newGuest = guest;
                     }
-                } currentGuest.add(newGuest);
+                }
+                currentGuest.add(newGuest);
             }
         }
 
 
         //Create room
         ArrayList<Room> availableRooms = new ArrayList<>();
-        for (Room room: roomList
-             ) {
-            if(numberOfGuests == room.getAmountOfBeds()){
+        for (Room room : roomList
+        ) {
+            if (numberOfGuests == room.getAmountOfBeds()) {
                 availableRooms.add(room);
             }
         }
         System.out.println("======================================================");
-          Room.printRoomList(availableRooms);
+        Room.printRoomList(availableRooms);
         //should we just get the room by the ID?
         System.out.println("Please choose room number");
         // get user input to choose a room number
@@ -227,49 +230,82 @@ public class Menu {
             }
         }
 
+        Booking booking = null;
+        boolean loop = true;
+        boolean shit = true;
+        while (loop) {
+            System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+            System.out.println("Year:");
+            int startYear = intInput();
+            System.out.println("Month:");
+            int startMonth = intInput();
+            System.out.println("Day");
+            int startDay = intInput();
+            System.out.println("Please input check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+            System.out.println("Year:");
+            int endYear = intInput();
+            System.out.println("Month:");
+            int endMonth = intInput();
+            System.out.println("Day");
+            int endDay = intInput();
 
-        System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
-        System.out.println("Year:");
-        int startYear = intInput();
-        System.out.println("Month:");
-        int startMonth = intInput();
-        System.out.println("Day");
-        int startDay = intInput();
-        System.out.println("Please input check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
-        System.out.println("Year:");
-        int endYear = intInput();
-        System.out.println("Month:");
-        int endMonth = intInput();
-        System.out.println("Day");
-        int endDay = intInput();
+            //should we perhaps calculate price and number of nights and just give the info?
+            System.out.println("======================================================");
 
-        //should we perhaps calculate price and number of nights and just give the info?
-        System.out.println("======================================================");
+            //Create Id
+            int id = -1;
+            int checkId = 1;
 
-        //Create Id
-        int id = -1;
-        int checkId = 1;
+            //Going through booking list to find missing ID
+            for (Booking booking0 : bookingList) {
+                if (checkId == booking0.getId()) {
+                    checkId++;
+                } else {
+                    id = checkId;
+                }
+            }
+            if (id == -1) {
+                id = bookingList.size() + 1;
+            }
 
-        //Going through booking list to find missing ID
-        for (Booking booking : bookingList) {
-            if (checkId == booking.getId()) {
-                checkId++;
-            } else {
-                id = checkId;
+            LocalDate start = LocalDate.of(startYear, startMonth, startDay);
+            LocalDate end = LocalDate.of(endYear, endMonth, endDay);
+
+            booking = new Booking(id, currentGuest, room, start, end);
+
+            //This is going to be the check dates part if it works
+            ArrayList<Booking> bookingsWithTheSameRoom = new ArrayList<>();
+            for (Booking booking2 : bookingList) {
+                if (booking.getRoom().getRoomNumber() == booking2.getRoom().getRoomNumber()) {
+                    bookingsWithTheSameRoom.add(booking2);
+                }
+            }
+
+            for (Booking booking3 : bookingsWithTheSameRoom) {
+                //Checks if the start and end date is before the booked start date
+                if (booking.getStartDate().isBefore(booking3.getStartDate()) && booking.getEndDate().isBefore(booking3.getStartDate())) {
+                    System.out.println("Room is available.");
+                    shit = false;
+                } else {
+                    System.out.println("Room is not available!");
+
+                }
+                if (booking.getStartDate().isAfter(booking3.getEndDate())) {
+                    System.out.println("Room is available.");
+                    boolean piss = false;
+                if ((!shit) && (!piss)){
+                    loop = false;
+                }
+                } else {
+                    System.out.println("Room is not available!");
+                }
             }
         }
-        if (id == -1) {
-            id = bookingList.size() + 1;
-        }
 
-        LocalDate start = LocalDate.of(startYear, startMonth, startDay);
-        LocalDate end = LocalDate.of(endYear, endMonth, endDay);
 
-        Booking booking = new Booking(id, currentGuest, room, start, end);
         booking.setGuestList(currentGuest);
         booking.bookingReceipt();
         bookingList.add(booking);
-
 
 
         //Organize bookingList
@@ -444,7 +480,7 @@ public class Menu {
 
     public void manageStaff() {
         //Get database from file
-       // DataBase dataBase = FileIo.databaseDeserialization();
+        // DataBase dataBase = FileIo.databaseDeserialization();
         ArrayList<Staff> staffList = dataBase.getStaffList();
 
         //chose ID of staff we want to change
