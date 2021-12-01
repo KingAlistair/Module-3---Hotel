@@ -10,7 +10,8 @@ public class Main {
 
 //Database reset bug
 
-//check if dates have been used for bookings - done //
+//check if dates have been used for bookings - done
+//fix date check at manage booking, change check out date
 
 //Diagrams:
 //UC diagram - done
