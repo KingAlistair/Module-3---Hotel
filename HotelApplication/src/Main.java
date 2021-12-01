@@ -22,15 +22,20 @@ public class Main {
                 }*/
 
 //Diagrams:
-
-//Domain model - finish it
+//UC diagram - done
+//Domain model - done
+//SSD - done-ish
+//SD - done
 
 //Use Case Descriptions (brief or fully dressed) - finish it
 // Class diagram (reverse engineer) - not done it
 
-//Gantt chart - almost done
-
+//Gantt chart - done-ish
+//Risk analysis - done
+//SWOT - done-ish
+//Stakeholder - done-ish
 //Canvas model - almost done
+
 
 
 //Extra list:
