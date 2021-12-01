@@ -232,7 +232,8 @@ public class Menu {
 
         Booking booking = null;
         boolean loop = true;
-        boolean shit = true;
+        boolean isBeforeStartDate = true;
+        boolean isAfterEndDate = true;
         while (loop) {
             System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
             System.out.println("Year:");
@@ -284,22 +285,25 @@ public class Menu {
             for (Booking booking3 : bookingsWithTheSameRoom) {
                 //Checks if the start and end date is before the booked start date
                 if (booking.getStartDate().isBefore(booking3.getStartDate()) && booking.getEndDate().isBefore(booking3.getStartDate())) {
-                    System.out.println("Room is available.");
-                    shit = false;
+                    System.out.println("Room is available");
                 } else {
-                    System.out.println("Room is not available!");
+                    System.out.println("Room is not availabe!");
+                    isBeforeStartDate = false;
 
                 }
                 if (booking.getStartDate().isAfter(booking3.getEndDate())) {
                     System.out.println("Room is available.");
-                    boolean piss = false;
-                if ((!shit) && (!piss)){
-                    loop = false;
-                }
+
                 } else {
-                    System.out.println("Room is not available!");
+                    System.out.println("Room is not availabe!");
+                    isAfterEndDate = false;
+
                 }
             }
+            if (isBeforeStartDate || isAfterEndDate) {
+                loop = false;
+            }
+            System.out.println("loop=false");
         }
 
 
