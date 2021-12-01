@@ -1,11 +1,8 @@
-import java.time.LocalDate;
-
 public class Main {
 
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.mainMenu();
-
     }
 }
 
@@ -14,14 +11,6 @@ public class Main {
 //Database reset bug
 
 //check if dates have been used for bookings //
-
-/*LocalDate startDate = LocalDate.of(2021,12,01);
-    LocalDate endDate = LocalDate.of(2021,12,20);
-    LocalDate searchDate = LocalDate.of(2021,12,10);
-
-        if (searchDate.isAfter(startDate) && searchDate.isBefore(endDate)) {
-                System.out.println("Day in use!");
-                }*/
 
 //Diagrams:
 //UC diagram - done

@@ -52,8 +52,8 @@ public class Menu {
                 break;
 
             case "r":
-                DataBase dataBase = new DataBase();
-                FileIo.databaseSerialization(dataBase);
+                DataBase dataBase2 = new DataBase();
+                FileIo.databaseSerialization(dataBase2);
                 System.out.println("Database has been reset!");
                 mainMenu();
                 break;
@@ -129,20 +129,18 @@ public class Menu {
         //Choose the number of guests
         System.out.println("How many guest would you like to add to the booking?");
         System.out.println("Max guest allowed is 3!");
-
-
         int numberOfGuests = intInput();
         if (numberOfGuests < 1 || numberOfGuests > 3) {
             System.out.println("Invalid input! Try again!");
             createBooking();
         }
 
+        //Create or add guests
         for (int i = 0; i < numberOfGuests; i++) {
             Guest newGuest = null;
             //Asks if new guest
             System.out.println("Do you want to create a new guest for the booking? y/n");
             String input = stringInput();
-
             if (input.equalsIgnoreCase("y")) {
                 //Create Guest
                 System.out.println("======================================================");
@@ -156,7 +154,7 @@ public class Menu {
                 String phoneNumber = stringInput();
                 System.out.println("======================================================");
 
-                //Create Id
+                //Create ID If new guest
                 int id = -1;
                 int checkId = 1;
 
@@ -171,7 +169,7 @@ public class Menu {
                 if (id == -1) {
                     id = guestList.size() + 1;
                 }
-
+                //New Guest created
                 Guest guest = new Guest(id, firstName, lastName, address, phoneNumber);
                 guestList.add(guest);
 
@@ -207,6 +205,15 @@ public class Menu {
         }
 
 
+        //Set up variables for while loop if room is not available
+        Booking booking = null;
+        boolean loop = true;
+
+        //Here comes the while loop baby!
+        while (loop) {
+            boolean isBeforeStartDate = true;
+            boolean isAfterEndDate = true;
+
         //Create room
         ArrayList<Room> availableRooms = new ArrayList<>();
         for (Room room : roomList
@@ -230,29 +237,7 @@ public class Menu {
             }
         }
 
-        Booking booking = null;
-        boolean loop = true;
-        boolean isBeforeStartDate = true;
-        boolean isAfterEndDate = true;
-        while (loop) {
-            System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
-            System.out.println("Year:");
-            int startYear = intInput();
-            System.out.println("Month:");
-            int startMonth = intInput();
-            System.out.println("Day");
-            int startDay = intInput();
-            System.out.println("Please input check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
-            System.out.println("Year:");
-            int endYear = intInput();
-            System.out.println("Month:");
-            int endMonth = intInput();
-            System.out.println("Day");
-            int endDay = intInput();
-
-            //should we perhaps calculate price and number of nights and just give the info?
-            System.out.println("======================================================");
-
+        //Create ID for new booking
             //Create Id
             int id = -1;
             int checkId = 1;
@@ -269,8 +254,39 @@ public class Menu {
                 id = bookingList.size() + 1;
             }
 
-            LocalDate start = LocalDate.of(startYear, startMonth, startDay);
-            LocalDate end = LocalDate.of(endYear, endMonth, endDay);
+
+            //Loop so user can't write in negative days (end date before start date)
+            LocalDate start = null;
+            LocalDate end = null;
+            boolean loop2 = true;
+            while (loop2) {
+                System.out.println("Please input check in date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+                System.out.println("Year:");
+                int startYear = intInput();
+                System.out.println("Month:");
+                int startMonth = intInput();
+                System.out.println("Day");
+                int startDay = intInput();
+                System.out.println("Please input check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+                System.out.println("Year:");
+                int endYear = intInput();
+                System.out.println("Month:");
+                int endMonth = intInput();
+                System.out.println("Day");
+                int endDay = intInput();
+
+                start = LocalDate.of(startYear, startMonth, startDay);
+                end = LocalDate.of(endYear, endMonth, endDay);
+
+                if (end.isBefore(start)) {
+                    loop2 = true;
+                    System.out.println("Your can't check out before you check in, you silly goat! Try again!\n");
+                } else {
+                    loop2 = false;
+                }
+                //End of while loop if loop is false
+            }
+            System.out.println("======================================================");
 
             booking = new Booking(id, currentGuest, room, start, end);
 
@@ -282,35 +298,33 @@ public class Menu {
                 }
             }
 
+            //Checks the new booking with old bookings if one of the statement is false, it stays false.
             for (Booking booking3 : bookingsWithTheSameRoom) {
                 //Checks if the start and end date is before the booked start date
                 if (booking.getStartDate().isBefore(booking3.getStartDate()) && booking.getEndDate().isBefore(booking3.getStartDate())) {
-                    System.out.println("Room is available");
                 } else {
-                    System.out.println("Room is not availabe!");
                     isBeforeStartDate = false;
-
                 }
+                //Checks if the start date is after the booked end date
                 if (booking.getStartDate().isAfter(booking3.getEndDate())) {
-                    System.out.println("Room is available.");
-
                 } else {
-                    System.out.println("Room is not availabe!");
                     isAfterEndDate = false;
-
                 }
             }
+            //If one of the statement is true booking is available,
             if (isBeforeStartDate || isAfterEndDate) {
+                System.out.println("Good job lad, the room is available!");
                 loop = false;
+            } else {
+                System.out.println("I'm terribly sorry to inform you, that room number "  + booking.getRoom().getRoomNumber() + " is not available during that time!\n" +
+                        "Please try to choose a different room or a different date!");
             }
-            System.out.println("loop=false");
+            //Here ends the while loop, if loop is true -> loop continues
         }
-
 
         booking.setGuestList(currentGuest);
         booking.bookingReceipt();
         bookingList.add(booking);
-
 
         //Organize bookingList
         ArrayList<Integer> idList = new ArrayList<>();
