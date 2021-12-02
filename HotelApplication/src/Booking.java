@@ -147,5 +147,7 @@ public class Booking implements java.io.Serializable {
             booking.bookingReceipt();
         }
     }
+
+
 }
 

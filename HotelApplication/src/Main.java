@@ -10,8 +10,10 @@ public class Main {
 
 //Database reset bug - done
 
+//ID index bug after removing booking
 //check if dates have been used for bookings - done
-//fix date check at manage booking, change check out date
+//fix date check at manage booking, change check out date- done
+
 
 //Diagrams:
 //UC diagram - done
