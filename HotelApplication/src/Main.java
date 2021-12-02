@@ -8,7 +8,7 @@ public class Main {
 
 //To do list:
 
-//Database reset bug
+//Database reset bug - done
 
 //check if dates have been used for bookings - done
 //fix date check at manage booking, change check out date
@@ -26,7 +26,7 @@ public class Main {
 //Risk analysis - done
 //SWOT - done-ish
 //Stakeholder - done-ish
-//Canvas model - almost done
+//Canvas model - done
 
 
 
