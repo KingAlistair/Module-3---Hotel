@@ -57,13 +57,14 @@ public class DataBase implements java.io.Serializable {
     public static ArrayList<Room> defaultRoomList() {
         ArrayList<Room> roomList = new ArrayList<>();
 
-        Room room1 = new Room(66, 6, 3, "Suite", true, 10666);
-        Room room2 = new Room(32, 3, 1, "Single bed", false, 323);
-        Room room3 = new Room(1, 1, 1, "Single bed", false, 100);
-        Room room4 = new Room(42, 4, 2, "Double bed", true, 4242);
-        Room room5 = new Room(24, 2, 1,"Single bed", false, 124);
-        Room room6 = new Room(69, 6, 2, "Suite",true, 10669);
-        Room room7 = new Room(5, 5, 2, "Suite", true, 5300);
+
+        Room room1 = new Room(11, 3, 1, "Single bed", false, 323);
+        Room room2 = new Room(12, 1, 1, "Single bed", false, 100);
+        Room room3 = new Room(13, 2, 1,"Single bed", false, 124);
+        Room room4 = new Room(22, 4, 2, "Double bed", true, 4242);
+        Room room5 = new Room(31, 6, 2, "Suite",true, 10669);
+        Room room6 = new Room(32, 6, 3, "Suite", true, 10666);
+        Room room7 = new Room(33, 5, 2, "Suite", true, 5300);
 
         roomList.add(room1);
         roomList.add(room2);
@@ -100,8 +101,18 @@ public class DataBase implements java.io.Serializable {
 
         Booking booking2 = new Booking(2, currentGuest, roomList.get(5), startDate, endDate);
 
+        currentGuest = new ArrayList<>();
+        currentGuest.add(guestList.get(5));
+        currentGuest.add(guestList.get(6));
+
+        startDate = LocalDate.of(2022,01,01);
+        endDate = LocalDate.of(2022,01,31);
+
+        Booking booking3 = new Booking(3, currentGuest, roomList.get(6),startDate, endDate );
+
         bookingList.add(booking1);
         bookingList.add(booking2);
+        bookingList.add(booking3);
 
         return bookingList;
     }
