@@ -5,33 +5,3 @@ public class Main {
         menu.mainMenu();
     }
 }
-
-//To do list:
-
-//Database reset bug - done
-//check if dates have been used for bookings - done
-//fix date check at manage booking, change check out date- done
-
-
-//Diagrams:
-//UC diagram - done
-//Domain model - done
-//SSD - done-ish
-//SD - done
-
-//Use Case Descriptions (brief or fully dressed) - finish it
-// Class diagram (reverse engineer) - not done it
-
-//Gantt chart - done-ish
-//Risk analysis - done
-//SWOT - done-ish
-//Stakeholder - done-ish
-//Canvas model - done
-
-
-
-//Extra list:
-
-//Other manage booking options
-//Inheritance for room (?)
-

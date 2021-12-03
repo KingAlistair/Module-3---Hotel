@@ -201,7 +201,6 @@ public class Menu {
             }
         }
 
-
         //Set up variables for while loop if room is not available
         Booking booking = null;
         boolean loop = true;
@@ -348,10 +347,7 @@ public class Menu {
 
     public void manageBooking() {
         DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Guest> guestList = dataBase.getGuestList();
-        ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
-
 
         //chose ID of booking we want to change
         System.out.println("Chose the ID of the Booking you want to change: ");
@@ -377,29 +373,7 @@ public class Menu {
         switch (stringInput()) {
 
             case "1":
-                booking.printBooking();
-
-                System.out.println("Please input new check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
-                System.out.println("Year:");
-                int endYear = intInput();
-                System.out.println("Month:");
-                int endMonth = intInput();
-                System.out.println("Day:");
-                int endDay = intInput();
-                LocalDate newEndDate = LocalDate.of(endYear, endMonth, endDay);
-                booking.setEndDate(newEndDate);
-
-                for (int i = 0; i < bookingList.size(); i++) {
-                    if (booking.getId() == bookingList.get(i).getId()) {
-                        bookingList.set(i, booking);
-                    }
-                }
-                //Set bookingList
-                dataBase.setBookingList(bookingList);
-
-                //Save into file
-                FileIo.databaseSerialization(dataBase);
-                booking.printBooking();
+                changeEndDate(booking);
                 break;
 
             case "2":
@@ -421,6 +395,70 @@ public class Menu {
 
         //returns to administer booking menu
         administerBooking();
+    }
+
+    public void changeEndDate(Booking booking) {
+        DataBase dataBase = FileIo.databaseDeserialization();
+        ArrayList<Booking> bookingList = dataBase.getBookingList();
+
+        boolean badDay = false;
+
+        booking.printBooking();
+
+        //Start of while loop to check if the booking end date is before start date
+        LocalDate newEndDate = null;
+
+
+        System.out.println("Please input new check out date: Year \"enter\" + Month \"Enter\" + Day \"Enter\"");
+        System.out.println("Year:");
+        int endYear = intInput();
+        System.out.println("Month:");
+        int endMonth = intInput();
+        System.out.println("Day:");
+        int endDay = intInput();
+        newEndDate = LocalDate.of(endYear, endMonth, endDay);
+
+        if (newEndDate.isBefore(booking.getStartDate())) {
+            System.out.println("You can not check out before checking in you dumdum!");
+            changeEndDate(booking);
+        }
+
+        ArrayList<Booking> sameRoomBookingList = new ArrayList<>();
+        for (Booking booking1 : bookingList) {
+            if (booking.getRoom().getRoomNumber() == booking1.getRoom().getRoomNumber()) {
+                if (booking.getId() == booking1.getId()) {
+                } else {
+                    sameRoomBookingList.add(booking1);
+                }
+            }
+        }
+
+        for (Booking booking2 : sameRoomBookingList) {
+            if (booking.getEndDate().isAfter(booking2.getStartDate()) && booking.getStartDate().isAfter(booking2.getEndDate())) {
+            } else {
+                if (booking.getEndDate().isBefore(booking2.getStartDate())) {
+                } else {
+                    System.out.println("End date is invalid! Room is occupied at that time!");
+                    badDay = true;
+                }
+            }
+        }
+
+        if (badDay) {
+            changeEndDate(booking);
+        }
+        booking.setEndDate(newEndDate);
+
+        for (int i = 0; i < bookingList.size(); i++) {
+            if (booking.getId() == bookingList.get(i).getId()) {
+                bookingList.set(i, booking);
+            }
+        }
+        //Set bookingList
+        dataBase.setBookingList(bookingList);
+
+        //Save into file
+        FileIo.databaseSerialization(dataBase);
     }
 
     public void deleteBooking() {
@@ -959,6 +997,4 @@ public class Menu {
         int input = scanner.nextInt();
         return input;
     }
-
-
 }
