@@ -1,13 +1,7 @@
-import javax.sound.midi.Soundbank;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Menu {
 
@@ -76,7 +70,7 @@ public class Menu {
         System.out.println("              1. Create booking");
         System.out.println("              2. Manage booking");
         System.out.println("              3. Delete booking");
-        System.out.println("              4. Show all bookings (" + (dataBase.getBookingList().size()) + ")\n");
+        System.out.println("              4. Show all bookings (" + (bookingList.size()) + ")\n");
         System.out.println("         Press \"enter\" to exit to main menu ");
         System.out.println("======================================================");
         System.out.println();
@@ -87,7 +81,7 @@ public class Menu {
         switch (input) {
             case "1":
                 createBooking();
-                administerBooking(); //do we need this when we already have it in the method?
+                administerBooking();
                 break;
 
             case "2":
@@ -112,7 +106,6 @@ public class Menu {
                 administerBooking();
                 break;
         }
-
     }
 
     public void createBooking() {
@@ -189,7 +182,6 @@ public class Menu {
                 //print out list of guests
                 Guest.printGuestList(guestList);
                 System.out.println("Please input Id of Guest #" + (i + 1));
-
                 String userInput = stringInput();
                 for (Guest guest : guestList
                 ) {
@@ -220,7 +212,7 @@ public class Menu {
             }
             System.out.println("======================================================");
             Room.printRoomList(availableRooms);
-            //should we just get the room by the ID?
+
             System.out.println("Please choose room number");
             // get user input to choose a room number
             int roomNum = intInput();
@@ -249,7 +241,6 @@ public class Menu {
             if (id == -1) {
                 id = bookingList.size() + 1;
             }
-
 
             //Loop so user can't write in negative days (end date before start date)
             LocalDate start = null;
@@ -419,11 +410,14 @@ public class Menu {
         int endDay = intInput();
         newEndDate = LocalDate.of(endYear, endMonth, endDay);
 
+        //endDate shall be after startDate
         if (newEndDate.isBefore(booking.getStartDate())) {
             System.out.println("You can not check out before checking in you dumdum!");
             changeEndDate(booking);
         }
 
+        //Checking if date is good
+        //Making list of booking with same room number as our booking
         ArrayList<Booking> sameRoomBookingList = new ArrayList<>();
         for (Booking booking1 : bookingList) {
             if (booking.getRoom().getRoomNumber() == booking1.getRoom().getRoomNumber()) {
@@ -435,10 +429,13 @@ public class Menu {
         }
 
         for (Booking booking2 : sameRoomBookingList) {
+            //Check if our booking duration is after another booking duration
             if (booking.getEndDate().isAfter(booking2.getStartDate()) && booking.getStartDate().isAfter(booking2.getEndDate())) {
             } else {
+                //Check if our booking is before another booking duration
                 if (booking.getEndDate().isBefore(booking2.getStartDate())) {
                 } else {
+                    //If not before or after it's bad date.
                     System.out.println("End date is invalid! Room is occupied at that time!");
                     badDay = true;
                 }
@@ -466,13 +463,9 @@ public class Menu {
 
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
-        ArrayList<Guest> guestList = dataBase.getGuestList();
-        ArrayList<Room> roomList = dataBase.getRoomList();
         ArrayList<Booking> bookingList = dataBase.getBookingList();
 
         System.out.println("Booking list: ");
-        Booking.printBookingList(bookingList);
-        //why wont it let me get the method?!?!??!     But it does >:) hehe thanks
         Booking.printBookingList(bookingList);
 
 
@@ -690,15 +683,12 @@ public class Menu {
         System.out.println("Chose the ID of the staff member you wish to remove: ");
         int ID = intInput();
 
-
         //remove if: for each staff, remove staff which equals the ID input by   user
         staffList.removeIf(staff -> staff.getId() == (ID));
         //we then set the staffList
         dataBase.setStaffList(staffList);
         //and serialise it
         FileIo.databaseSerialization(dataBase);
-
-        System.out.println("Staff member has now been removed!");
 
         //returns to administer staff menu
         administerStaff();
