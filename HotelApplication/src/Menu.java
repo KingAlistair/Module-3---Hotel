@@ -109,7 +109,7 @@ public class Menu {
 
             default:
                 System.out.println("Wrong input, please try again! ");
-                administerStaff();
+                administerBooking();
                 break;
         }
 
