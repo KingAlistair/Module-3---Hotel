@@ -671,7 +671,6 @@ public class Menu {
         administerStaff();
     }
 
-
     public void removeStaff() {
         //Get database from file
         DataBase dataBase = FileIo.databaseDeserialization();
@@ -688,6 +687,8 @@ public class Menu {
         dataBase.setStaffList(staffList);
         //and serialise it
         FileIo.databaseSerialization(dataBase);
+
+        System.out.println("--Returning to staff menu--");
 
         //returns to administer staff menu
         administerStaff();
