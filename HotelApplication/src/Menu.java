@@ -480,7 +480,7 @@ public class Menu {
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
-        System.out.println("Booking has now been removed!");
+        System.out.println("--Returning to booking menu--");
 
         //returns to administer booking menu
         administerBooking();
@@ -682,8 +682,7 @@ public class Menu {
 
         System.out.println("Chose the ID of the staff member you wish to remove: ");
         int ID = intInput();
-
-        //remove if: for each staff, remove staff which equals the ID input by   user
+        //remove if: for each staff, remove staff which equals the ID input by user
         staffList.removeIf(staff -> staff.getId() == (ID));
         //we then set the staffList
         dataBase.setStaffList(staffList);
@@ -891,7 +890,7 @@ public class Menu {
         //and serialise it
         FileIo.databaseSerialization(dataBase);
 
-        System.out.println("Guest member has now been removed!");
+        System.out.println("--Returning to guest menu--");
 
         //returns to administer guest menu
         administerGuest();
